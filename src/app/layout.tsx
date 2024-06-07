@@ -1,11 +1,14 @@
 import { cn } from "@/lib/tailwind"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
-import "./globals.css"
+import { CSSProperties } from "react"
+// import "./globals.css"
 
 const fontSans = FontSans({
   subsets: ["latin"],
-  variable: "--font-sans",
+  preload: true,
+  display: "swap",
+  // variable: "--font-sans",
 })
 
 export const metadata: Metadata = {
@@ -20,7 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, "min-h-screen bg-background font-sans antialiased")}>
+      <body
+        style={
+          {
+            "-webkit-font-smoothing": "antialiased",
+            "-moz-osx-font-smoothing": "grayscale",
+          } as CSSProperties
+        }
+        className={cn(fontSans.className)}
+      >
         {children}
       </body>
     </html>
