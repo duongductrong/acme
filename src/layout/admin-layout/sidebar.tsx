@@ -1,9 +1,9 @@
 "use client"
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons"
+import { MailOutlined, MoneyCollectOutlined, SettingOutlined } from "@ant-design/icons"
 import type { MenuProps } from "antd"
 import { Flex, Menu } from "antd"
 import { createStyles } from "antd-style"
-import React from "react"
+import { ComponentPropsWithoutRef } from "react"
 import BrandName from "./brandname"
 import ProfileBar from "./profilebar"
 
@@ -11,25 +11,25 @@ type MenuItem = Required<MenuProps>["items"][number]
 
 const items: MenuItem[] = [
   {
-    key: "grp-dashboard",
-    label: "Dashboard",
+    key: "grp-general",
+    label: "General",
     type: "group",
     children: [
-      { key: "13", label: "Monthly dashboard 13" },
+      { key: "13", label: "Dashboard" },
       { key: "14", label: "Statistics" },
       {
         key: "sub2",
-        label: "Navigation Two",
-        icon: <AppstoreOutlined />,
+        label: "Billing",
+        icon: <MoneyCollectOutlined />,
         children: [
-          { key: "5", label: "Option 5" },
-          { key: "6", label: "Option 6" },
+          { key: "5", label: "Daily" },
+          { key: "6", label: "Monthly" },
           {
             key: "sub3",
-            label: "Submenu",
+            label: "Yearly",
             children: [
-              { key: "7", label: "Option 7" },
-              { key: "8", label: "Option 8" },
+              { key: "7", label: "2024" },
+              { key: "8", label: "2023" },
             ],
           },
         ],
@@ -77,11 +77,13 @@ const items: MenuItem[] = [
   },
 ]
 
-const Sidebar: React.FC = () => {
+export interface SidebarProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {}
+
+const Sidebar = ({ className, ...props }: SidebarProps) => {
   const { styles, cx } = useStyles()
 
   return (
-    <Flex className={cx(styles.root)} vertical>
+    <Flex {...props} className={cx(styles.root, className)} vertical>
       <BrandName className={styles.brandName} />
       <Menu
         defaultSelectedKeys={["1"]}
@@ -96,7 +98,9 @@ const Sidebar: React.FC = () => {
 }
 
 const useStyles = createStyles(({ token }) => ({
-  root: {},
+  root: {
+    width: 256,
+  },
 
   brandName: {
     borderBottomWidth: 1,
@@ -112,7 +116,6 @@ const useStyles = createStyles(({ token }) => ({
   },
 
   menu: {
-    width: 256,
     height: "calc(100lvh - 54px - 64px)",
     overflow: "auto",
   },

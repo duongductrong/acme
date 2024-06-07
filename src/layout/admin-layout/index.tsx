@@ -14,7 +14,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
   return (
     <Flex className={cx(styles.root)}>
-      <Sidebar />
+      <Sidebar className={cx(styles.sidebar)} />
       <main className={cx(styles.main)}>{children}</main>
     </Flex>
   )
@@ -22,7 +22,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
 const useStyles = createStyles(() => ({
   root: {},
-  main: {},
+  sidebar: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+  },
+  main: {
+    marginLeft: "256px",
+    width: "100%",
+    minHeight: "100lvh",
+  },
 }))
 
 export default AdminLayout

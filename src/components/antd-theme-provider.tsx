@@ -12,7 +12,7 @@ export interface AntdThemeProviderProps {
 const AntdThemeProvider = ({ children }: AntdThemeProviderProps) => {
   return (
     <AntdRegistry>
-      <ThemeProvider>
+      <ThemeProvider theme={{ cssVar: true }}>
         <StyleRegistry>{children}</StyleRegistry>
       </ThemeProvider>
     </AntdRegistry>

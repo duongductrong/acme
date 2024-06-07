@@ -1,6 +1,7 @@
 import { MoonOutlined, SlackOutlined } from "@ant-design/icons"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
+import { ChevronsUpDown } from "lucide-react"
 import { ComponentPropsWithoutRef } from "react"
 
 export interface BrandNameProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {}
@@ -15,7 +16,7 @@ const BrandName = ({ className, ...props }: BrandNameProps) => {
       <span>Acme Corp.</span>
 
       <button type="button" className={cx(styles.themeMode)}>
-        <MoonOutlined width={32} height={32} />
+        <ChevronsUpDown width={16} height={16} />
       </button>
     </Flex>
   )
@@ -46,6 +47,8 @@ const useStyles = createStyles(({ token }) => ({
     border: "none",
     marginLeft: "auto",
     cursor: "pointer",
+    display: "grid",
+    placeItems: "center",
   },
 }))
 
