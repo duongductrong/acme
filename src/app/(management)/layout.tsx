@@ -1,4 +1,4 @@
-import AntdThemeProvider from "@/components/antd-theme-provider"
+import AntdThemeProvider from "@/components/ant-ui/theme/antd-theme-provider"
 import { ReactNode } from "react"
 
 export interface LayoutProps {

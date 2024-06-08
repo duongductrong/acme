@@ -1,8 +1,24 @@
 "use client"
-import { MailOutlined, MoneyCollectOutlined, SettingOutlined } from "@ant-design/icons"
 import type { MenuProps } from "antd"
 import { Flex, Menu } from "antd"
 import { createStyles } from "antd-style"
+import {
+  BarChart4,
+  Blocks,
+  Box,
+  CirclePercent,
+  CreditCard,
+  File,
+  FormInput,
+  Inbox,
+  Package2,
+  Podcast,
+  Satellite,
+  ServerCog,
+  Settings,
+  Ticket,
+  Users,
+} from "lucide-react"
 import { ComponentPropsWithoutRef } from "react"
 import BrandName from "./brandname"
 import ProfileBar from "./profilebar"
@@ -11,52 +27,66 @@ type MenuItem = Required<MenuProps>["items"][number]
 
 const items: MenuItem[] = [
   {
-    key: "grp-general",
-    label: "General",
+    key: "grp-activity",
+    label: "Activity",
     type: "group",
     children: [
-      { key: "13", label: "Dashboard" },
-      { key: "14", label: "Statistics" },
-      {
-        key: "sub2",
-        label: "Billing",
-        icon: <MoneyCollectOutlined />,
-        children: [
-          { key: "5", label: "Daily" },
-          { key: "6", label: "Monthly" },
-          {
-            key: "sub3",
-            label: "Yearly",
-            children: [
-              { key: "7", label: "2024" },
-              { key: "8", label: "2023" },
-            ],
-          },
-        ],
-      },
+      { key: "Dashboard", label: "Dashboard", icon: <BarChart4 size={16} /> },
+      { key: "statistics", label: "Statistics", icon: <Box size={16} /> },
+      { key: "orders", label: "Orders", icon: <Package2 size={16} /> },
+      { key: "clients", label: "Clients", icon: <Users size={16} /> },
+      { key: "files", label: "Files", icon: <File size={16} /> },
+      { key: "tickets", label: "Tickets", icon: <Ticket size={16} /> },
     ],
   },
   {
-    key: "sub1",
-    label: "Navigation One",
-    icon: <MailOutlined />,
+    type: "divider",
+  },
+  {
+    type: "group",
+    key: "billing",
+    label: "Billing",
+    children: [
+      { key: "billing-invoices", label: "Invoices", icon: <CreditCard size={16} /> },
+      { key: "billing-subscriptions", label: "Subscriptions", icon: <Podcast size={16} /> },
+    ],
+  },
+  {
+    type: "divider",
+  },
+  {
+    type: "group",
+    label: "Marketing",
+    key: "marketing",
     children: [
       {
-        key: "g1",
-        label: "Item 1",
-        type: "group",
-        children: [
-          { key: "1", label: "Option 1" },
-          { key: "2", label: "Option 2" },
-        ],
+        key: "affiliates",
+        label: "Affiliates",
+        icon: <Inbox size={16} />,
       },
       {
-        key: "g2",
-        label: "Item 2",
-        type: "group",
+        key: "coupons",
+        label: "Coupons",
+        icon: <CirclePercent size={16} />,
         children: [
-          { key: "3", label: "Option 3" },
-          { key: "4", label: "Option 4" },
+          {
+            key: "g1",
+            label: "Item 1",
+            type: "group",
+            children: [
+              { key: "1", label: "Option 1" },
+              { key: "2", label: "Option 2" },
+            ],
+          },
+          {
+            key: "g2",
+            label: "Item 2",
+            type: "group",
+            children: [
+              { key: "3", label: "Option 3" },
+              { key: "4", label: "Option 4" },
+            ],
+          },
         ],
       },
     ],
@@ -65,14 +95,15 @@ const items: MenuItem[] = [
     type: "divider",
   },
   {
-    key: "sub4",
-    label: "Navigation Three",
-    icon: <SettingOutlined />,
+    key: "setup",
+    label: "Setup",
+    type: "group",
     children: [
-      { key: "9", label: "Option 9" },
-      { key: "10", label: "Option 10" },
-      { key: "11", label: "Option 11" },
-      { key: "12", label: "Option 12" },
+      { key: "setup-services", label: "Services", icon: <ServerCog size={16} /> },
+      { key: "setup-order-forms", label: "Order forms", icon: <FormInput size={16} /> },
+      { key: "setup-modules", label: "Modules", icon: <Blocks size={16} /> },
+      { key: "setup-integration", label: "Integrations", icon: <Satellite size={16} /> },
+      { key: "setup-settings", label: "Settings", icon: <Settings size={16} /> },
     ],
   },
 ]

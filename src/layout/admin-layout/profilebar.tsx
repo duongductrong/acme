@@ -1,10 +1,13 @@
+import { ProfileCard } from "@/components/ant-ui/cards/profile-card"
+import { ThemeSwitcher } from "@/components/ant-ui/theme/theme-switcher"
 import { UserOutlined } from "@ant-design/icons"
-import { Flex, MenuProps, Typography } from "antd"
 import { createStyles } from "antd-style"
-import Avatar from "antd/es/avatar/avatar"
 import Dropdown from "antd/es/dropdown/dropdown"
+import Flex from "antd/es/flex"
+import { MenuProps } from "antd/es/menu"
+import Typography from "antd/es/typography"
 import { ChevronsUpDown } from "lucide-react"
-import { ComponentPropsWithoutRef } from "react"
+import { ComponentPropsWithoutRef, useMemo } from "react"
 
 const Text = Typography.Text
 
@@ -13,77 +16,82 @@ export interface ProfileBarProps extends Omit<ComponentPropsWithoutRef<typeof Fl
 const ProfileBar = ({ className, ...props }: ProfileBarProps) => {
   const { cx, styles } = useStyles()
 
-  const items: MenuProps["items"] = [
-    {
-      key: "profile",
-      label: (
-        <Flex align="center" gap={12}>
-          <Avatar shape="square" size={32} icon={<UserOutlined />} />
-
-          <Flex className={cx(styles.content)} vertical>
-            <Text>Taurus</Text>
-            <Text>taurus@gmail.com</Text>
+  const items: MenuProps["items"] = useMemo(
+    () => [
+      {
+        key: "profile",
+        label: <ProfileCard name="Taurus" email="taurus@gmail.com" avatar={<UserOutlined />} />,
+      },
+      {
+        key: "account",
+        label: (
+          <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+            Account
+          </a>
+        ),
+      },
+      {
+        key: "billing",
+        label: (
+          <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+            Billing
+          </a>
+        ),
+      },
+      {
+        key: "notification",
+        label: (
+          <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+            Notification
+          </a>
+        ),
+      },
+      {
+        key: "theme",
+        label: (
+          <Flex justify="space-between">
+            <span>Dark mode</span>
+            <ThemeSwitcher />
           </Flex>
-        </Flex>
-      ),
-    },
-    {
-      key: "account",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          Account
-        </a>
-      ),
-    },
-    {
-      key: "billing",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          Billing
-        </a>
-      ),
-    },
-    {
-      key: "notification",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          Notification
-        </a>
-      ),
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: "sign out",
-      label: "Sign out",
-    },
-  ]
+        ),
+      },
+      {
+        type: "divider",
+      },
+      {
+        key: "sign out",
+        label: "Sign out",
+      },
+    ],
+    [],
+  )
 
   return (
     <Dropdown trigger={["click"]} menu={{ items }} placement="bottomRight">
-      <Flex {...props} className={cx(styles.root, className)} align="center" gap={12}>
-        <Avatar shape="square" size={32} icon={<UserOutlined />} />
-
-        <Flex className={cx(styles.content)} vertical>
-          <Text>Taurus</Text>
-          <Text>taurus@gmail.com</Text>
-        </Flex>
-
-        <button className={cx(styles.dropdown)}>
-          <ChevronsUpDown size={16} />
-        </button>
-      </Flex>
+      <ProfileCard
+        {...props}
+        name="Taurus"
+        email="taurus@gmail.com"
+        avatar={<UserOutlined />}
+        icon={
+          <button className={cx(styles.dropdown)}>
+            <ChevronsUpDown size={16} />
+          </button>
+        }
+        className={cx(styles.root, className)}
+      />
     </Dropdown>
   )
 }
 
-const useStyles = createStyles(({ token }) => ({
+const useStyles = createStyles(({ token, isDarkMode }) => ({
   root: {
     height: 64,
     padding: token.paddingSM,
     paddingInline: token.paddingMD,
     cursor: "pointer",
+    background: isDarkMode ? "#141414" : "#ffffff",
+    color: token.colorTextBase,
   },
 
   content: {

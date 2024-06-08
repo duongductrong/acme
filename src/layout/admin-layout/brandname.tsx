@@ -1,4 +1,4 @@
-import { MoonOutlined, SlackOutlined } from "@ant-design/icons"
+import { SlackOutlined } from "@ant-design/icons"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
 import { ChevronsUpDown } from "lucide-react"
@@ -22,13 +22,15 @@ const BrandName = ({ className, ...props }: BrandNameProps) => {
   )
 }
 
-const useStyles = createStyles(({ token }) => ({
+const useStyles = createStyles(({ token, isDarkMode }) => ({
   root: {
     padding: token.paddingSM,
     paddingInline: token.paddingMD,
     fontWeight: "600",
     fontSize: token.fontSize,
     height: 54,
+    background: isDarkMode ? "#141414" : token.colorBgBase,
+    color: token.colorTextBase,
   },
 
   logo: {

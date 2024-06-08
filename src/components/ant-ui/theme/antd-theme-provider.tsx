@@ -1,18 +1,31 @@
 "use client"
 
 import { AntdRegistry } from "@ant-design/nextjs-registry"
-import { StyleProvider, ThemeProvider, createGlobalStyle, extractStaticStyle } from "antd-style"
+import {
+  StyleProvider,
+  ThemeMode,
+  ThemeProvider,
+  createGlobalStyle,
+  extractStaticStyle,
+} from "antd-style"
 import { useServerInsertedHTML } from "next/navigation"
-import { PropsWithChildren, ReactNode, useRef } from "react"
+import { PropsWithChildren, ReactNode, useRef, useState } from "react"
 
 export interface AntdThemeProviderProps {
   children: ReactNode
 }
 
 const AntdThemeProvider = ({ children }: AntdThemeProviderProps) => {
+  const [themeMode, setThemeMode] = useState<ThemeMode>("light")
+
   return (
     <AntdRegistry>
-      <ThemeProvider theme={{ cssVar: true }}>
+      <ThemeProvider
+        themeMode={themeMode}
+        onThemeModeChange={(theme) => setThemeMode(theme)}
+        theme={{ cssVar: true }}
+        customToken={{}}
+      >
         <StyleRegistry>{children}</StyleRegistry>
       </ThemeProvider>
     </AntdRegistry>
