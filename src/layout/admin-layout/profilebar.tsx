@@ -86,11 +86,7 @@ const ProfileBar = ({ className, ...props }: ProfileBarProps) => {
 
 const useStyles = createStyles(({ token, isDarkMode }) => ({
   root: {
-    height: 64,
-    padding: token.paddingSM,
-    paddingInline: token.paddingMD,
     cursor: "pointer",
-    background: isDarkMode ? "#141414" : "#ffffff",
     color: token.colorTextBase,
   },
 

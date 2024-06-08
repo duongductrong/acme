@@ -1,5 +1,6 @@
 import { useThemeMode } from "antd-style"
 import Switch from "antd/es/switch"
+import { Tooltip } from "../ui/tooltip"
 
 export interface ThemeSwitcherProps {
   withoutStopPropagation?: boolean
@@ -9,19 +10,22 @@ export const ThemeSwitcher = ({ withoutStopPropagation, ...props }: ThemeSwitche
   const { setAppearance, setThemeMode } = useThemeMode()
 
   return (
-    <Switch
-      {...props}
-      size="small"
-      onChange={(isChecked) => {
-        const mode = isChecked ? "dark" : "light"
-        setAppearance(mode)
-        setThemeMode(mode)
-      }}
-      onClick={(_, event) => {
-        if (!withoutStopPropagation) {
-          event.stopPropagation()
-        }
-      }}
-    />
+    <Tooltip title="Coming soon">
+      <Switch
+        {...props}
+        size="small"
+        onChange={(isChecked) => {
+          const mode = isChecked ? "dark" : "light"
+          setAppearance(mode)
+          setThemeMode(mode)
+        }}
+        onClick={(_, event) => {
+          if (!withoutStopPropagation) {
+            event.stopPropagation()
+          }
+        }}
+        disabled
+      />
+    </Tooltip>
   )
 }

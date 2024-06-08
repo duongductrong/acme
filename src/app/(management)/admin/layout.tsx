@@ -1,3 +1,5 @@
+"use client"
+
 import AdminLayout from "@/layout/admin-layout"
 import React from "react"
 

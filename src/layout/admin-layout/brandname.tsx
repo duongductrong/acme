@@ -1,3 +1,4 @@
+import { Text } from "@/components/ant-ui/ui/typography"
 import { SlackOutlined } from "@ant-design/icons"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
@@ -13,10 +14,10 @@ const BrandName = ({ className, ...props }: BrandNameProps) => {
       <span className={cx(styles.logo)}>
         <SlackOutlined width={24} height={24} />
       </span>
-      <span>Acme Corp.</span>
+      <Text>Acme Corp.</Text>
 
       <button type="button" className={cx(styles.themeMode)}>
-        <ChevronsUpDown width={16} height={16} />
+        <ChevronsUpDown size={16} />
       </button>
     </Flex>
   )
@@ -24,13 +25,8 @@ const BrandName = ({ className, ...props }: BrandNameProps) => {
 
 const useStyles = createStyles(({ token, isDarkMode }) => ({
   root: {
-    padding: token.paddingSM,
-    paddingInline: token.paddingMD,
+    width: "100%",
     fontWeight: "600",
-    fontSize: token.fontSize,
-    height: 54,
-    background: isDarkMode ? "#141414" : token.colorBgBase,
-    color: token.colorTextBase,
   },
 
   logo: {
@@ -51,6 +47,7 @@ const useStyles = createStyles(({ token, isDarkMode }) => ({
     cursor: "pointer",
     display: "grid",
     placeItems: "center",
+    color: token.colorTextDisabled,
   },
 }))
 

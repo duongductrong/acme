@@ -1,6 +1,7 @@
 "use client"
 
-import { Flex } from "antd"
+import { Page } from "@/components/ant-ui/sections/page"
+import { PageLayout } from "@/components/ant-ui/sections/page/page-layout"
 import { createStyles } from "antd-style"
 import { ReactNode } from "react"
 import Sidebar from "./sidebar"
@@ -13,10 +14,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { cx, styles } = useStyles()
 
   return (
-    <Flex className={cx(styles.root)}>
+    <PageLayout>
       <Sidebar className={cx(styles.sidebar)} />
-      <main className={cx(styles.main)}>{children}</main>
-    </Flex>
+      <Page component="main" className={cx(styles.main)}>
+        {children}
+      </Page>
+    </PageLayout>
   )
 }
 

@@ -1,4 +1,4 @@
-import AntdThemeProvider from "@/components/ant-ui/theme/antd-theme-provider"
+import { ThemeProvider } from "@/components/ant-ui/theme/provider"
 import { ReactNode } from "react"
 
 export interface LayoutProps {
@@ -6,7 +6,7 @@ export interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  return <AntdThemeProvider>{children}</AntdThemeProvider>
+  return <ThemeProvider>{children}</ThemeProvider>
 }
 
 export default Layout
