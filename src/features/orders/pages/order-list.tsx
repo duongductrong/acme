@@ -1,5 +1,6 @@
 "use client"
 
+import { FilterWizard } from "@/components/ant-ui/pro-ui/filter-wizard"
 import { PageBody, PageCard, PageFragment, PageTitle } from "@/components/ant-ui/sections/page"
 import { Card } from "@/components/ant-ui/ui/card"
 import { Flex } from "@/components/ant-ui/ui/flex"
@@ -11,6 +12,7 @@ import { PAGE_URLS } from "@/constants/urls"
 import { Select, SelectProps, Space, Tag } from "antd"
 import { createStyles } from "antd-style"
 import Input from "antd/es/input/Input"
+import { Filter, Package2, PieChart, User } from "lucide-react"
 import { useState } from "react"
 
 export interface OrderListProps {}
@@ -173,7 +175,32 @@ const OrderList = (props: OrderListProps) => {
           </Flex> */}
         </PageCard>
         <PageCard component={Flex} justify="space-between" withGapBottom>
-          <Input placeholder="Search..." style={{ maxWidth: 300 }} />
+          <Flex gap={16}>
+            <Input placeholder="Search..." style={{ maxWidth: 300 }} />
+            <FilterWizard
+              icon={<Filter size={14} />}
+              attributes={[
+                {
+                  icon: <Package2 size={14} />,
+                  key: "orderId",
+                  label: "Order ID",
+                  type: "text",
+                },
+                {
+                  icon: <User size={14} />,
+                  key: "customerName",
+                  label: "Customer Name",
+                  type: "text",
+                },
+                {
+                  icon: <PieChart size={14} />,
+                  key: "status",
+                  label: "Status",
+                  type: "select",
+                },
+              ]}
+            />
+          </Flex>
           <Select {...sharedProps} {...selectProps} placeholder="Show fields" />
         </PageCard>
         <Table className={cx(styles.table)} columns={columns} dataSource={data} impact />
