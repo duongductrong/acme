@@ -30,7 +30,15 @@ export const menuItems: MenuItem[] = [
     children: [
       {
         key: PAGE_URLS.ADMIN.DASHBOARD,
-        label: <Link href={PAGE_URLS.ADMIN.DASHBOARD}>Dashboard</Link>,
+        label: (
+          <Link
+            href={{
+              pathname: PAGE_URLS.ADMIN.DASHBOARD,
+            }}
+          >
+            Dashboard
+          </Link>
+        ),
         icon: <Box size={16} />,
       },
       {

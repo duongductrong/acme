@@ -6,6 +6,8 @@ import { Flex } from "@/components/ant-ui/ui/flex"
 import { Col, Row } from "@/components/ant-ui/ui/grid"
 import { Statistic } from "@/components/ant-ui/ui/statistic"
 import { Table, TableProps } from "@/components/ant-ui/ui/table"
+import { Link } from "@/components/router/link"
+import { PAGE_URLS } from "@/constants/urls"
 import { Select, SelectProps, Space, Tag } from "antd"
 import { createStyles } from "antd-style"
 import Input from "antd/es/input/Input"
@@ -28,7 +30,14 @@ const columns: TableProps<OrderType>["columns"] = [
     title: "Order ID",
     dataIndex: "orderId",
     key: "orderId",
-    render: (text) => <a>{text}</a>,
+    render: (text, record) => (
+      <Link
+        href={PAGE_URLS.ADMIN.ORDERS_VIEW}
+        as={PAGE_URLS.ADMIN.ORDERS_VIEW.replace("[id]", record.orderId)}
+      >
+        {text}
+      </Link>
+    ),
   },
   {
     title: "Customer Name",
@@ -88,7 +97,7 @@ const columns: TableProps<OrderType>["columns"] = [
 ]
 
 const data: OrderType[] = Array.from({ length: 100 }, (_, index) => ({
-  key: `${new Date().getTime()}.${Math.random()}`,
+  key: `ORD${1000 + index}`,
   orderId: `ORD${1000 + index}`,
   customerName: `Customer ${index + 1}`,
   orderDate: new Date().toLocaleDateString(),
