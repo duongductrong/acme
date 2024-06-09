@@ -1,5 +1,6 @@
 "use client"
 
+import { Link } from "@/components/router/link"
 import { PAGE_URLS } from "@/constants/urls"
 import type { MenuProps } from "antd"
 import {
@@ -18,7 +19,6 @@ import {
   Ticket,
   Users,
 } from "lucide-react"
-import Link from "next/link"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
