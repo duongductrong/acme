@@ -13,30 +13,47 @@ import { useState } from "react"
 
 export interface OrderListProps {}
 
-interface DataType {
+interface OrderType {
   key: string
-  name: string
-  age: number
-  address: string
+  orderId: string
+  customerName: string
+  orderDate: string
+  status: string
+  totalAmount: number
   tags: string[]
 }
 
-const columns: TableProps<DataType>["columns"] = [
+const columns: TableProps<OrderType>["columns"] = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: "Order ID",
+    dataIndex: "orderId",
+    key: "orderId",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: "Customer Name",
+    dataIndex: "customerName",
+    key: "customerName",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    title: "Order Date",
+    dataIndex: "orderDate",
+    key: "orderDate",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (status) => {
+      let color = status === "Delivered" ? "green" : status === "Pending" ? "geekblue" : "volcano"
+      return <Tag color={color}>{status.toUpperCase()}</Tag>
+    },
+  },
+  {
+    title: "Total Amount",
+    dataIndex: "totalAmount",
+    key: "totalAmount",
+    render: (amount) => `$${amount?.toFixed(2)}`,
   },
   {
     title: "Tags",
@@ -46,7 +63,7 @@ const columns: TableProps<DataType>["columns"] = [
       <>
         {tags.map((tag) => {
           let color = tag.length > 5 ? "geekblue" : "green"
-          if (tag === "loser") {
+          if (tag === "urgent") {
             color = "volcano"
           }
           return (
@@ -63,20 +80,22 @@ const columns: TableProps<DataType>["columns"] = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
+        <a>View {record.orderId}</a>
         <a>Delete</a>
       </Space>
     ),
   },
 ]
 
-const data: DataType[] = Array(100).fill({
+const data: OrderType[] = Array.from({ length: 100 }, (_, index) => ({
   key: `${new Date().getTime()}.${Math.random()}`,
-  name: "Joe Black",
-  age: 32,
-  address: "Sydney No. 1 Lake Park",
-  tags: ["cool", "teacher"],
-})
+  orderId: `ORD${1000 + index}`,
+  customerName: `Customer ${index + 1}`,
+  orderDate: new Date().toLocaleDateString(),
+  status: index % 3 === 0 ? "Delivered" : index % 2 === 0 ? "Pending" : "Cancelled",
+  totalAmount: index * 14.2 * 1000,
+  tags: index % 2 === 0 ? ["new", "important"] : ["regular", "urgent"],
+}))
 
 interface ItemProps {
   label: string
