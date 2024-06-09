@@ -34,7 +34,7 @@ const useStyles = createStyles(({ token }) => ({
   root: {
     height: token.Page.itemHeaderHeight,
     borderBottom: `1px solid ${token.colorBorderSecondary}`,
-    paddingInline: token.paddingMD,
+    paddingInline: token.Page.paddingInlineBase,
   },
 
   sticky: {

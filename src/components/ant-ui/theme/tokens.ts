@@ -52,7 +52,7 @@ export const commonTokens: Partial<AliasToken> = {
   fontSizeHeading5: customTokens.fontSize.base.fontSize as unknown as number,
 }
 export const lightColorTokens: Partial<AliasToken> = {
-  colorBorderSecondary: "#e3e3e7",
+  colorBorderSecondary: "#f0f0f0",
 }
 
 export const darkColorTokens: Partial<AliasToken> = {

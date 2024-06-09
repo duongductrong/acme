@@ -14,7 +14,7 @@ const useStyles = createStyles(({ token, isDarkMode }) => {
       height: token.Page.itemHeaderHeight,
       padding: token.paddingSM,
       paddingInline: token.paddingMD,
-      background: isDarkMode ? "#141414" : token.colorBgBase,
+      background: token.Page.bodyBgBase,
       color: token.colorTextBase,
 
       borderBottomWidth: 1,
@@ -25,7 +25,7 @@ const useStyles = createStyles(({ token, isDarkMode }) => {
     },
 
     sideBody: {
-      height: `calc(100lvh - ${token.Page.itemHeaderHeight}px - ${token.Page.itemHeaderHeight}px)`,
+      height: `calc(100lvh - ${token.Page.itemHeaderHeight}px - ${token.Page.itemFooterHeight}px)`,
       overflow: "auto",
 
       // "::-webkit-scrollbar": {},
@@ -33,7 +33,7 @@ const useStyles = createStyles(({ token, isDarkMode }) => {
     },
 
     sideFooter: {
-      background: isDarkMode ? "#141414" : token.colorBgBase,
+      background: token.Page.bodyBgBase,
       padding: token.paddingSM,
       paddingInline: token.paddingMD,
       height: token.Page.itemFooterHeight,

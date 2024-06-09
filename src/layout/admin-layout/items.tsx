@@ -29,12 +29,12 @@ export const menuItems: MenuItem[] = [
     type: "group",
     children: [
       {
-        key: "Dashboard",
+        key: PAGE_URLS.ADMIN.DASHBOARD,
         label: <Link href={PAGE_URLS.ADMIN.DASHBOARD}>Dashboard</Link>,
         icon: <Box size={16} />,
       },
       {
-        key: "orders",
+        key: PAGE_URLS.ADMIN.ORDERS,
         label: <Link href={PAGE_URLS.ADMIN.ORDERS}>Orders</Link>,
         icon: <Package2 size={16} />,
       },

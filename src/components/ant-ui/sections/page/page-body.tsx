@@ -2,21 +2,28 @@
 import { ForwardRefComponent } from "@/types/react-polymorphic"
 import { createStyles } from "antd-style"
 import { ReactNode, forwardRef } from "react"
+import { getDimensionToken } from "../../ui/utils"
 
 export interface PageBodyProps {
   children: ReactNode
-  noPadding?: boolean
+  impact?: boolean
+  inPage?: boolean
 }
 
 export const PageBody = forwardRef(
-  ({ children, className, component: Comp = "section", noPadding, ...props }, ref) => {
-    const { cx, styles, theme } = useStyles()
+  ({ children, className, component: Comp = "section", impact, inPage, ...props }, ref) => {
+    const { cx, styles } = useStyles()
 
     return (
       <Comp
         {...props}
         ref={ref}
-        className={cx(styles.root, noPadding ? styles.noPadding : undefined, className)}
+        className={cx(
+          styles.root,
+          impact ? styles.impact : undefined,
+          inPage ? styles.rootInPage : undefined,
+          className,
+        )}
       >
         {children}
       </Comp>
@@ -28,12 +35,16 @@ PageBody.displayName = "PageBody"
 
 const useStyles = createStyles(({ token }) => ({
   root: {
-    padding: token.paddingMD,
-    backgroundColor: token.Page.bodyBgBase,
-    minHeight: `calc(100lvh - ${token.Page.itemHeaderHeight}px)`,
+    padding: getDimensionToken(token.Page.paddingInlineBase),
+    height: `calc(100lvh - ${getDimensionToken(token.Page.itemHeaderHeight)})`,
   },
 
-  noPadding: {
+  rootInPage: {
+    maxHeight: `calc(100lvh - ${getDimensionToken(token.Page.itemHeaderHeight)} - ${getDimensionToken(token.Page.itemFooterHeight)})`,
+    overflow: "auto",
+  },
+
+  impact: {
     padding: token.spacing[0],
   },
 }))

@@ -21,6 +21,9 @@ declare module "antd-style" {
 
       bodyBgBase: string
 
+      paddingInlineBase: number | string
+      paddingBlockBase: number | string
+
       sideWidth: number
     }
   }
@@ -48,16 +51,20 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
             },
             components: {
               Menu: {
-                itemHeight: 32,
+                itemHeight: 30,
               },
-              Page: {
-                itemHeaderHeight: 56,
 
-                itemFooterHeight: 56,
+              Page: {
+                itemHeaderHeight: 48,
+
+                itemFooterHeight: 49,
 
                 bodyBgBase: "#fbfbfb",
 
                 sideWidth: 256,
+
+                paddingInlineBase: 24,
+                paddingBlockBase: 16,
               },
 
               Segmented: {
@@ -67,6 +74,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
               Table: {
                 headerBg: "transparent",
+                cellPaddingInline: 24,
+                cellPaddingInlineMD: 24,
+                cellPaddingInlineSM: 24,
               },
             },
           }
