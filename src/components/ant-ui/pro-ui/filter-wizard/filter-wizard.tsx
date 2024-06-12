@@ -4,9 +4,14 @@ import { CSSProperties, ReactNode } from "react"
 import { Button } from "../../ui/button"
 import { Flex } from "../../ui/flex"
 import { ScrollArea } from "../../ui/scroll-area"
-import { Plus } from "lucide-react"
 
-export type FilterWizardAttributeType = "text" | "select"
+export type FilterWizardAttributeType =
+  | "text"
+  | "select"
+  | "timestamp"
+  | "number"
+  | "date"
+  | "multi-select"
 
 export interface FilterWizardAttribute {
   icon: ReactNode

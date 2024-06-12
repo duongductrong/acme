@@ -2,6 +2,7 @@
 
 import { FilterWizard } from "@/components/ant-ui/pro-ui/filter-wizard"
 import { PageBody, PageCard, PageFragment, PageTitle } from "@/components/ant-ui/sections/page"
+import { Button } from "@/components/ant-ui/ui/button"
 import { Card } from "@/components/ant-ui/ui/card"
 import { Flex } from "@/components/ant-ui/ui/flex"
 import { Col, Row } from "@/components/ant-ui/ui/grid"
@@ -9,11 +10,17 @@ import { Statistic } from "@/components/ant-ui/ui/statistic"
 import { Table, TableProps } from "@/components/ant-ui/ui/table"
 import { Link } from "@/components/router/link"
 import { PAGE_URLS } from "@/constants/urls"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Select, SelectProps, Space, Tag } from "antd"
 import { createStyles } from "antd-style"
-import Input from "antd/es/input/Input"
 import { Filter, Package2, PieChart, User } from "lucide-react"
 import { useState } from "react"
+import { Field, Form } from "taurus-form"
+import { z } from "zod"
+
+const filterSchema = z.object({ search: z.string().nullish() })
+
+export type FilterSchemaInferred = z.infer<typeof filterSchema>
 
 export interface OrderListProps {}
 
@@ -143,68 +150,61 @@ const OrderList = (props: OrderListProps) => {
 
   return (
     <PageFragment>
-      <PageBody component={Flex} impact vertical>
-        <PageTitle title="Orders" description="Manage your orders so easy and quickly" isCard />
+      <Form<FilterSchemaInferred>
+        resolver={zodResolver(filterSchema)}
+        onSubmit={(values) => console.log(values.search)}
+      >
+        <PageBody component={Flex} impact vertical>
+          <PageTitle title="Orders" description="Manage your orders so easy and quickly" isCard />
 
-        <PageCard component={Flex} gap={16} vertical>
-          <Row gutter={16}>
-            <Col span={4}>
-              <Card>
-                <Statistic title="Total orders" value={1083} />
-              </Card>
-            </Col>
-            <Col span={4}>
-              <Card>
-                <Statistic title="Total profit" value={112893} suffix="$" />
-              </Card>
-            </Col>
-          </Row>
+          <PageCard>
+            <Row gutter={16}>
+              <Col span={4}>
+                <Card>
+                  <Statistic title="Total orders" value={1083} />
+                </Card>
+              </Col>
+              <Col span={4}>
+                <Card>
+                  <Statistic title="Total profit" value={112893} suffix="$" />
+                </Card>
+              </Col>
+            </Row>
+          </PageCard>
+          <PageCard component={Flex} justify="space-between" withGapBottom>
+            <Flex gap={12}>
+              <Field component="text" name="search" placeholder="Search..." />
+              <Button htmlType="button">Submit </Button>
+              <FilterWizard
+                icon={<Filter size={14} />}
+                attributes={[
+                  {
+                    icon: <Package2 size={14} />,
+                    key: "orderId",
+                    label: "Order ID",
+                    type: "text",
+                  },
+                  {
+                    icon: <User size={14} />,
+                    key: "customerName",
+                    label: "Customer Name",
+                    type: "text",
+                  },
+                  {
+                    icon: <PieChart size={14} />,
+                    key: "status",
+                    label: "Status",
+                    type: "select",
+                  },
+                ]}
+              />
+            </Flex>
 
-          {/* <Flex>
-            <Segmented
-              defaultValue="All (1002)"
-              options={[
-                "All (1002)",
-                "Completed (600)",
-                "Pending (300)",
-                "Unfulfilled (0)",
-                "Refunded (48)",
-                "Failed (2)",
-              ]}
-            />
-          </Flex> */}
-        </PageCard>
-        <PageCard component={Flex} justify="space-between" withGapBottom>
-          <Flex gap={16}>
-            <Input placeholder="Search..." style={{ maxWidth: 300 }} />
-            <FilterWizard
-              icon={<Filter size={14} />}
-              attributes={[
-                {
-                  icon: <Package2 size={14} />,
-                  key: "orderId",
-                  label: "Order ID",
-                  type: "text",
-                },
-                {
-                  icon: <User size={14} />,
-                  key: "customerName",
-                  label: "Customer Name",
-                  type: "text",
-                },
-                {
-                  icon: <PieChart size={14} />,
-                  key: "status",
-                  label: "Status",
-                  type: "select",
-                },
-              ]}
-            />
-          </Flex>
-          <Select {...sharedProps} {...selectProps} placeholder="Show fields" />
-        </PageCard>
-        <Table className={cx(styles.table)} columns={columns} dataSource={data} impact />
-      </PageBody>
+            <Select {...sharedProps} {...selectProps} placeholder="Show fields" />
+          </PageCard>
+          <Table className={cx(styles.table)} columns={columns} dataSource={data} impact />
+        </PageBody>
+      </Form>
     </PageFragment>
   )
 }

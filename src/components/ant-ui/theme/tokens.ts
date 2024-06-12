@@ -26,7 +26,7 @@ export const customTokens = {
     19: spacingBase * 19,
     20: spacingBase * 20,
   },
-  fontSize: {
+  textSize: {
     xs: { fontSize: "0.75rem", lineHeight: "1rem" }, // 12px, 16px
     sm: { fontSize: "0.875rem", lineHeight: "1.25rem" }, // 14px, 20px
     base: { fontSize: "1rem", lineHeight: "1.5rem" }, // 16px, 24px
@@ -45,11 +45,11 @@ export const customTokens = {
 } as const
 
 export const commonTokens: Partial<AliasToken> = {
-  fontSizeHeading1: customTokens.fontSize["3xl"].fontSize as unknown as number,
-  fontSizeHeading2: customTokens.fontSize["2xl"].fontSize as unknown as number,
-  fontSizeHeading3: customTokens.fontSize.xl.fontSize as unknown as number,
-  fontSizeHeading4: customTokens.fontSize.lg.fontSize as unknown as number,
-  fontSizeHeading5: customTokens.fontSize.base.fontSize as unknown as number,
+  fontSizeHeading1: customTokens.textSize["3xl"].fontSize as unknown as number,
+  fontSizeHeading2: customTokens.textSize["2xl"].fontSize as unknown as number,
+  fontSizeHeading3: customTokens.textSize.xl.fontSize as unknown as number,
+  fontSizeHeading4: customTokens.textSize.lg.fontSize as unknown as number,
+  fontSizeHeading5: customTokens.textSize.base.fontSize as unknown as number,
 }
 export const lightColorTokens: Partial<AliasToken> = {
   colorBorderSecondary: "#f0f0f0",
