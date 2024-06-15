@@ -1,8 +1,8 @@
 "use client"
 
 import { FilterWizard } from "@/components/ant-ui/pro-ui/filter-wizard"
+import { Field } from "@/components/ant-ui/pro-ui/form-wizard/field"
 import { PageBody, PageCard, PageFragment, PageTitle } from "@/components/ant-ui/sections/page"
-import { Button } from "@/components/ant-ui/ui/button"
 import { Card } from "@/components/ant-ui/ui/card"
 import { Flex } from "@/components/ant-ui/ui/flex"
 import { Col, Row } from "@/components/ant-ui/ui/grid"
@@ -11,14 +11,14 @@ import { Table, TableProps } from "@/components/ant-ui/ui/table"
 import { Link } from "@/components/router/link"
 import { PAGE_URLS } from "@/constants/urls"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Select, SelectProps, Space, Tag } from "antd"
+import { SelectProps, Space, Tag } from "antd"
 import { createStyles } from "antd-style"
 import { Filter, Package2, PieChart, User } from "lucide-react"
 import { useState } from "react"
-import { Field, Form } from "taurus-form"
+import { Form, useFormRef } from "taurus-form"
 import { z } from "zod"
 
-const filterSchema = z.object({ search: z.string().nullish() })
+const filterSchema = z.object({ search: z.string().nullish(), showFields: z.any() })
 
 export type FilterSchemaInferred = z.infer<typeof filterSchema>
 
@@ -148,11 +148,18 @@ const OrderList = (props: OrderListProps) => {
     onChange: setValue,
   }
 
+  const [formRef, methods] = useFormRef<FilterSchemaInferred>()
+
+  const handleClicked = () => {
+    console.log(methods?.getValues("search"))
+  }
+
   return (
     <PageFragment>
       <Form<FilterSchemaInferred>
+        formRef={formRef}
         resolver={zodResolver(filterSchema)}
-        onSubmit={(values) => console.log(values.search)}
+        onSubmit={(values) => console.log(values)}
       >
         <PageBody component={Flex} impact vertical>
           <PageTitle title="Orders" description="Manage your orders so easy and quickly" isCard />
@@ -173,8 +180,7 @@ const OrderList = (props: OrderListProps) => {
           </PageCard>
           <PageCard component={Flex} justify="space-between" withGapBottom>
             <Flex gap={12}>
-              <Field component="text" name="search" placeholder="Search..." />
-              <Button htmlType="button">Submit </Button>
+              <Field component="text" name="search" placeholder="Search..." allowClear />
               <FilterWizard
                 icon={<Filter size={14} />}
                 attributes={[
@@ -200,7 +206,12 @@ const OrderList = (props: OrderListProps) => {
               />
             </Flex>
 
-            <Select {...sharedProps} {...selectProps} placeholder="Show fields" />
+            <Field
+              component="select"
+              name="showFields"
+              {...sharedProps}
+              placeholder="Show fields"
+            />
           </PageCard>
           <Table className={cx(styles.table)} columns={columns} dataSource={data} impact />
         </PageBody>
