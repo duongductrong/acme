@@ -62,7 +62,11 @@ export const menuItems: MenuItem[] = [
         icon: <PackagePlus size={16} />,
       },
       { key: "clients", label: <Link href="#">Clients</Link>, icon: <Users size={16} /> },
-      { key: "files", label: <Link href="#">Files</Link>, icon: <File size={16} /> },
+      {
+        key: "files",
+        label: <Link href={PAGE_URLS.ADMIN.MEDIA}>Files</Link>,
+        icon: <File size={16} />,
+      },
       { key: "tickets", label: <Link href="#">Tickets</Link>, icon: <Ticket size={16} /> },
     ],
   },

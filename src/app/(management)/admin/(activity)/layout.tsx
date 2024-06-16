@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
             title: "Home",
           },
           {
-            title: "Dashboard",
+            title: "Management",
           },
         ]}
         toolbar={

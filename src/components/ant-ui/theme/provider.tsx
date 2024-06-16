@@ -73,7 +73,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
               },
 
               Table: {
-                headerBg: "transparent",
+                // headerBg: "transparent",
                 cellPaddingInline: 24,
                 cellPaddingInlineMD: 24,
                 cellPaddingInlineSM: 24,
