@@ -1,18 +1,12 @@
 "use client"
 
-import {
-  PageSide,
-  PageSideBody,
-  PageSideFooter,
-  PageSideHeader,
-} from "@/components/ant-ui/sections/page"
+import { PageSide, PageSideBody, PageSideHeader } from "@/components/ant-ui/sections/page"
 import { Flex, Menu } from "antd"
 import { createStyles } from "antd-style"
 import { usePathname } from "next/navigation"
 import { ComponentPropsWithoutRef } from "react"
-import { menuItems } from "../../constants/sidebar"
-import BrandName from "./brandname"
-import ProfileBar from "./profilebar"
+import Header from "./header"
+import { settingItems } from "@/constants/sidebar"
 
 export interface SidebarProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {}
 
@@ -24,25 +18,22 @@ const Sidebar = ({ className, ...props }: SidebarProps) => {
   return (
     <PageSide className={cx(className)}>
       <PageSideHeader>
-        <BrandName className={styles.brandName} />
+        <Header className={styles.header} />
       </PageSideHeader>
-      <PageSideBody>
+      <PageSideBody hasFooter={false}>
         <Menu
           mode="inline"
           defaultSelectedKeys={[pathname]}
           className={cx(styles.menu)}
-          items={menuItems}
+          items={settingItems}
         />
       </PageSideBody>
-      <PageSideFooter>
-        <ProfileBar className={cx(styles.profileBar)} />
-      </PageSideFooter>
     </PageSide>
   )
 }
 
 const useStyles = createStyles(({ token }) => ({
-  brandName: {},
+  header: {},
 
   profileBar: {
     width: "100%",

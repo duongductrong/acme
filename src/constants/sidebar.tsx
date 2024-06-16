@@ -4,19 +4,29 @@ import { Link } from "@/components/router/link"
 import { PAGE_URLS } from "@/constants/urls"
 import type { MenuProps } from "antd"
 import {
+  BellRing,
   Blocks,
   Box,
+  Cable,
+  CircleDollarSign,
   CirclePercent,
+  Code,
   CreditCard,
+  Cuboid,
+  Eclipse,
   File,
+  Folder,
   FormInput,
   Inbox,
   Package2,
+  PackagePlus,
   Podcast,
   Satellite,
   ServerCog,
   Settings,
+  Shield,
   Ticket,
+  User,
   Users,
 } from "lucide-react"
 
@@ -46,9 +56,14 @@ export const menuItems: MenuItem[] = [
         label: <Link href={PAGE_URLS.ADMIN.ORDERS}>Orders</Link>,
         icon: <Package2 size={16} />,
       },
-      { key: "clients", label: <Link href="/">Clients</Link>, icon: <Users size={16} /> },
-      { key: "files", label: <Link href="/">Files</Link>, icon: <File size={16} /> },
-      { key: "tickets", label: <Link href="/">Tickets</Link>, icon: <Ticket size={16} /> },
+      {
+        key: "products",
+        label: <Link href={PAGE_URLS.ADMIN.ORDERS}>Products</Link>,
+        icon: <PackagePlus size={16} />,
+      },
+      { key: "clients", label: <Link href="#">Clients</Link>, icon: <Users size={16} /> },
+      { key: "files", label: <Link href="#">Files</Link>, icon: <File size={16} /> },
+      { key: "tickets", label: <Link href="#">Tickets</Link>, icon: <Ticket size={16} /> },
     ],
   },
   {
@@ -115,7 +130,53 @@ export const menuItems: MenuItem[] = [
       { key: "setup-order-forms", label: "Order forms", icon: <FormInput size={16} /> },
       { key: "setup-modules", label: "Modules", icon: <Blocks size={16} /> },
       { key: "setup-integration", label: "Integrations", icon: <Satellite size={16} /> },
-      { key: "setup-settings", label: "Settings", icon: <Settings size={16} /> },
+      {
+        key: "setup-settings",
+        label: <Link href={PAGE_URLS.ADMIN.SETTINGS}>Settings</Link>,
+        icon: <Settings size={16} />,
+      },
+    ],
+  },
+]
+
+export const settingItems: MenuItem[] = [
+  {
+    key: "grp-account",
+    label: "Account",
+    type: "group",
+    children: [
+      { key: "profile", label: <Link href="#">Profile</Link>, icon: <User size={16} /> },
+      {
+        key: "storage-account",
+        label: <Link href="#">Storage account</Link>,
+        icon: <Folder size={16} />,
+      },
+      {
+        key: "notification",
+        label: <Link href="#">Notification</Link>,
+        icon: <BellRing size={16} />,
+      },
+      {
+        key: "security",
+        label: <Link href="#">Security</Link>,
+        icon: <Shield size={16} />,
+      },
+    ],
+  },
+  {
+    type: "divider",
+  },
+  {
+    type: "group",
+    key: "workspace",
+    label: "Workspace",
+    children: [
+      { key: "workspace-general", label: "General", icon: <Cuboid size={16} /> },
+      { key: "workspace-members", label: "Members", icon: <Users size={16} /> },
+      { key: "workspace-plans", label: "Plans", icon: <Eclipse size={16} /> },
+      { key: "workspace-billing", label: "Billing", icon: <CircleDollarSign size={16} /> },
+      { key: "workspace-developers", label: "Developers", icon: <Code size={16} /> },
+      { key: "workspace-integrations", label: "Integrations", icon: <Cable size={16} /> },
     ],
   },
 ]

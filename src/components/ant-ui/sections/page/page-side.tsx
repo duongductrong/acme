@@ -5,7 +5,13 @@ import { createStyles } from "antd-style"
 import { ComponentPropsWithoutRef, forwardRef } from "react"
 import { Flex } from "../../ui/flex"
 
-const useStyles = createStyles(({ token, isDarkMode }) => {
+export interface UseStyleProps {
+  hasFooter?: boolean
+}
+
+const useStyles = createStyles(({ token }, props: UseStyleProps) => {
+  const hasFooter = props?.hasFooter
+
   return {
     side: {
       width: token.Page.sideWidth,
@@ -25,7 +31,7 @@ const useStyles = createStyles(({ token, isDarkMode }) => {
     },
 
     sideBody: {
-      height: `calc(100lvh - ${token.Page.itemHeaderHeight}px - ${token.Page.itemFooterHeight}px)`,
+      height: `calc(100lvh - ${token.Page.itemHeaderHeight}px - ${hasFooter ? token.Page.itemFooterHeight : 0}px)`,
       overflow: "auto",
 
       // "::-webkit-scrollbar": {},
@@ -68,14 +74,20 @@ export const PageSideHeader = forwardRef(({ className, children, ...props }, ref
 
 PageSideHeader.displayName = "PageSideHeader"
 
-export const PageSideBody = forwardRef(({ className, children, ...props }, ref) => {
-  const { cx, styles } = useStyles()
-  return (
-    <Flex {...props} className={cx(styles.sideBody)} ref={ref} vertical>
-      {children}
-    </Flex>
-  )
-}) as ForwardRefComponent<"div", PageSideHeaderProps>
+export interface PageSideBodyProps extends ComponentPropsWithoutRef<typeof Flex> {
+  hasFooter?: boolean
+}
+
+export const PageSideBody = forwardRef(
+  ({ className, children, hasFooter = true, ...props }, ref) => {
+    const { cx, styles } = useStyles({ hasFooter })
+    return (
+      <Flex {...props} className={cx(styles.sideBody)} ref={ref} vertical>
+        {children}
+      </Flex>
+    )
+  },
+) as ForwardRefComponent<"div", PageSideBodyProps>
 
 PageSideBody.displayName = "PageSideBody"
 
