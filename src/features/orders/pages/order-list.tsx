@@ -15,7 +15,7 @@ import { SelectProps, Space, Tag } from "antd"
 import { createStyles } from "antd-style"
 import { Filter, Package2, PieChart, User } from "lucide-react"
 import { useState } from "react"
-import { Form, useFormRef } from "taurus-form"
+import { Form } from "hookform-field"
 import { z } from "zod"
 
 const filterSchema = z.object({ search: z.string().nullish(), showFields: z.any() })
@@ -148,16 +148,9 @@ const OrderList = (props: OrderListProps) => {
     onChange: setValue,
   }
 
-  const [formRef, methods] = useFormRef<FilterSchemaInferred>()
-
-  const handleClicked = () => {
-    console.log(methods?.getValues("search"))
-  }
-
   return (
     <PageFragment>
       <Form<FilterSchemaInferred>
-        formRef={formRef}
         resolver={zodResolver(filterSchema)}
         onSubmit={(values) => console.log(values)}
       >
