@@ -1,8 +1,8 @@
 {
   "version": "v1",
   "packages": {
-    "taurus-form": {
-      "signature": "c86272d674b14cb44d1951275ee62615",
+    "taurus-hookform": {
+      "signature": "5a61fcf90fa147f3a76b6e4f5030ce0f",
       "file": true
     }
   }

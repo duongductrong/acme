@@ -2,7 +2,7 @@
 
 import { createStyles } from "antd-style"
 import { ReactNode } from "react"
-import { FormProvider } from "taurus-form"
+import { FormProvider } from "taurus-hookform"
 
 import { getDimensionToken } from "../../ui/utils"
 

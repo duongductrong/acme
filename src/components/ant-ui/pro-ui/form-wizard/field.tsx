@@ -2,7 +2,7 @@
 
 import SkeletonInput from "antd/es/skeleton/Input"
 import dynamic from "next/dynamic"
-import { createField } from "taurus-form"
+import { createField } from "hookform-field"
 
 const loading = () => <SkeletonInput size="small" />
 
