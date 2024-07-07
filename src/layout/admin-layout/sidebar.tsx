@@ -6,11 +6,13 @@ import {
   PageSideFooter,
   PageSideHeader,
 } from "@/components/ant-ui/sections/page"
-import { Flex, Menu } from "antd"
-import { createStyles } from "antd-style"
+import { MenuComposer } from "@/components/ui/menu"
+import { menuItems } from "@/constants/sidebar"
+import { cn } from "@/lib/tailwind"
+import { Flex } from "antd"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ComponentPropsWithoutRef } from "react"
-import { menuItems } from "../../constants/sidebar"
 import BrandName from "./brandname"
 import ProfileBar from "./profilebar"
 
@@ -19,44 +21,25 @@ export interface SidebarProps extends Omit<ComponentPropsWithoutRef<typeof Flex>
 const Sidebar = ({ className, ...props }: SidebarProps) => {
   const pathname = usePathname()
 
-  const { styles, cx } = useStyles()
-
   return (
-    <PageSide className={cx(className)}>
+    <PageSide className={cn(className)}>
       <PageSideHeader>
-        <BrandName className={styles.brandName} />
+        <BrandName />
       </PageSideHeader>
-      <PageSideBody>
-        <Menu
-          mode="inline"
+      <PageSideBody className="h-full font-medium">
+        <MenuComposer
+          type="multiple"
+          items={menuItems ?? []}
+          components={{ link: Link }}
           defaultSelectedKeys={[pathname]}
-          className={cx(styles.menu)}
-          items={menuItems}
+          className="p-4"
         />
       </PageSideBody>
-      <PageSideFooter>
-        <ProfileBar className={cx(styles.profileBar)} />
+      <PageSideFooter className="bg-page-sidebar">
+        <ProfileBar className="w-full" />
       </PageSideFooter>
     </PageSide>
   )
 }
-
-const useStyles = createStyles(({ token }) => ({
-  brandName: {},
-
-  profileBar: {
-    width: "100%",
-  },
-
-  menu: {
-    background: token.Page.bodyBgBase,
-    height: "100%",
-    fontWeight: 500,
-    ".ant-menu-item-divider": {
-      marginBottom: token.spacing[3],
-      borderColor: "transparent",
-    },
-  },
-}))
 
 export default Sidebar

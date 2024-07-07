@@ -13,7 +13,7 @@ export interface PageBodyProps {
   variant?: "container" | "fluid"
 }
 
-export interface UseStyleProps {
+interface UseStyleProps {
   fluidVertical?: boolean
 }
 

@@ -5,36 +5,21 @@ import { PageLayout } from "@/components/ant-ui/sections/page/page-layout"
 import { createStyles } from "antd-style"
 import { ReactNode } from "react"
 import Sidebar from "./sidebar"
+import { cn } from "@/lib/tailwind"
 
 export interface SettingLayoutProps {
   children: ReactNode
 }
 
 const SettingLayout = ({ children }: SettingLayoutProps) => {
-  const { cx, styles } = useStyles()
-
   return (
     <PageLayout>
-      <Sidebar className={cx(styles.sidebar)} />
-      <Page component="main" className={cx(styles.main)} noPageHeader>
+      <Sidebar className={cn("fixed left-0 top-0")} />
+      <Page component="main" className={cn("ml-[256px] min-h-lvh w-full")} noPageHeader>
         {children}
       </Page>
     </PageLayout>
   )
 }
-
-const useStyles = createStyles(() => ({
-  root: {},
-  sidebar: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-  },
-  main: {
-    marginLeft: "256px",
-    width: "100%",
-    minHeight: "100lvh",
-  },
-}))
 
 export default SettingLayout

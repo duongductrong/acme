@@ -33,6 +33,10 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+
+    --page-sidebar: #fbfbfb;
+    --page-border: 0 0 94%;
+    --page-group-label: #00000073;
   }
 
   .dark {

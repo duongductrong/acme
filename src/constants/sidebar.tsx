@@ -1,8 +1,8 @@
 "use client"
 
 import { Link } from "@/components/router/link"
+import { MenuItemNode } from "@/components/ui/menu"
 import { PAGE_URLS } from "@/constants/urls"
-import type { MenuProps } from "antd"
 import {
   BellRing,
   Blocks,
@@ -30,9 +30,7 @@ import {
   Users,
 } from "lucide-react"
 
-type MenuItem = Required<MenuProps>["items"][number]
-
-export const menuItems: MenuItem[] = [
+export const menuItems: MenuItemNode[] = [
   {
     key: "grp-activity",
     label: "Activity",
@@ -40,38 +38,30 @@ export const menuItems: MenuItem[] = [
     children: [
       {
         key: PAGE_URLS.ADMIN.DASHBOARD,
-        label: (
-          <Link
-            href={{
-              pathname: PAGE_URLS.ADMIN.DASHBOARD,
-            }}
-          >
-            Dashboard
-          </Link>
-        ),
+        href: PAGE_URLS.ADMIN.DASHBOARD,
+        label: "Dashboard",
         icon: <Box size={16} />,
       },
       {
         key: PAGE_URLS.ADMIN.ORDERS,
-        label: <Link href={PAGE_URLS.ADMIN.ORDERS}>Orders</Link>,
+        href: PAGE_URLS.ADMIN.ORDERS,
+        label: "Orders",
         icon: <Package2 size={16} />,
       },
       {
         key: "products",
-        label: <Link href={PAGE_URLS.ADMIN.ORDERS}>Products</Link>,
+        label: "Products",
         icon: <PackagePlus size={16} />,
       },
-      { key: "clients", label: <Link href="#">Clients</Link>, icon: <Users size={16} /> },
+      { key: "clients", label: "Clients", icon: <Users size={16} /> },
       {
         key: "files",
-        label: <Link href={PAGE_URLS.ADMIN.MEDIA}>Files</Link>,
+        href: PAGE_URLS.ADMIN.MEDIA,
+        label: "Files",
         icon: <File size={16} />,
       },
-      { key: "tickets", label: <Link href="#">Tickets</Link>, icon: <Ticket size={16} /> },
+      { key: "tickets", label: "Tickets", icon: <Ticket size={16} /> },
     ],
-  },
-  {
-    type: "divider",
   },
   {
     type: "group",
@@ -81,9 +71,6 @@ export const menuItems: MenuItem[] = [
       { key: "billing-invoices", label: "Invoices", icon: <CreditCard size={16} /> },
       { key: "billing-subscriptions", label: "Subscriptions", icon: <Podcast size={16} /> },
     ],
-  },
-  {
-    type: "divider",
   },
   {
     type: "group",
@@ -103,7 +90,7 @@ export const menuItems: MenuItem[] = [
           {
             key: "g1",
             label: "Item 1",
-            type: "group",
+            type: "item",
             children: [
               { key: "1", label: "Option 1" },
               { key: "2", label: "Option 2" },
@@ -112,7 +99,7 @@ export const menuItems: MenuItem[] = [
           {
             key: "g2",
             label: "Item 2",
-            type: "group",
+            type: "item",
             children: [
               { key: "3", label: "Option 3" },
               { key: "4", label: "Option 4" },
@@ -121,9 +108,6 @@ export const menuItems: MenuItem[] = [
         ],
       },
     ],
-  },
-  {
-    type: "divider",
   },
   {
     key: "setup",
@@ -136,18 +120,15 @@ export const menuItems: MenuItem[] = [
       { key: "setup-integration", label: "Integrations", icon: <Satellite size={16} /> },
       {
         key: "setup-settings",
-        label: (
-          <Link href={PAGE_URLS.ADMIN.SETTINGS} values={{ from: PAGE_URLS.ADMIN.DASHBOARD }}>
-            Settings
-          </Link>
-        ),
+        href: PAGE_URLS.ADMIN.SETTINGS,
+        label: "Settings",
         icon: <Settings size={16} />,
       },
     ],
   },
 ]
 
-export const settingItems: MenuItem[] = [
+export const settingItems: MenuItemNode[] = [
   {
     key: "grp-account",
     label: "Account",
@@ -155,28 +136,26 @@ export const settingItems: MenuItem[] = [
     children: [
       {
         key: "profile",
-        label: <Link href={PAGE_URLS.ADMIN.SETTINGS_PROFILE}>Profile</Link>,
+        href: PAGE_URLS.ADMIN.SETTINGS_PROFILE,
+        label: "Profile",
         icon: <User size={16} />,
       },
       {
         key: "storage-account",
-        label: <Link href="#">Storage account</Link>,
+        label: "Storage account",
         icon: <Folder size={16} />,
       },
       {
         key: "notification",
-        label: <Link href="#">Notification</Link>,
+        label: "Notification",
         icon: <BellRing size={16} />,
       },
       {
         key: "security",
-        label: <Link href="#">Security</Link>,
+        label: "Security",
         icon: <Shield size={16} />,
       },
     ],
-  },
-  {
-    type: "divider",
   },
   {
     type: "group",
