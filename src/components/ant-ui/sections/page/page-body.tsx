@@ -3,6 +3,7 @@ import { ForwardRefComponent } from "@/types/react-polymorphic"
 import { createStyles } from "antd-style"
 import { ReactNode, forwardRef } from "react"
 import { getDimensionToken } from "../../ui/utils"
+import { usePageContext } from "./use-page-context"
 
 export interface PageBodyProps {
   children: ReactNode
@@ -10,6 +11,10 @@ export interface PageBodyProps {
   inPage?: boolean
 
   variant?: "container" | "fluid"
+}
+
+export interface UseStyleProps {
+  fluidVertical?: boolean
 }
 
 export const PageBody = forwardRef(
@@ -25,7 +30,8 @@ export const PageBody = forwardRef(
     },
     ref,
   ) => {
-    const { cx, styles } = useStyles()
+    const { noPageHeader } = usePageContext()
+    const { cx, styles } = useStyles({ fluidVertical: noPageHeader })
 
     return (
       <Comp
@@ -47,10 +53,13 @@ export const PageBody = forwardRef(
 
 PageBody.displayName = "PageBody"
 
-const useStyles = createStyles(({ token }) => ({
+const useStyles = createStyles(({ token }, props: UseStyleProps) => ({
   root: {
     padding: getDimensionToken(token.Page.paddingInlineBase),
-    height: `calc(100lvh - ${getDimensionToken(token.Page.itemHeaderHeight)})`,
+    height: props.fluidVertical
+      ? undefined
+      : `calc(100lvh - ${getDimensionToken(token.Page.itemHeaderHeight)})`,
+    minHeight: props.fluidVertical ? "100lvh" : undefined,
   },
 
   rootInPage: {

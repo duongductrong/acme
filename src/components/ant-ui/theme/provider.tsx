@@ -10,6 +10,7 @@ import {
 } from "antd-style"
 import { useServerInsertedHTML } from "next/navigation"
 import { PropsWithChildren, ReactNode, useRef, useState } from "react"
+import { getDimensionToken } from "../ui/utils"
 import type { CustomAliasTokens } from "./tokens"
 import { commonTokens, customTokens, darkColorTokens, lightColorTokens } from "./tokens"
 
@@ -120,5 +121,22 @@ export const ResetCSS = createGlobalStyle`
   html, body {
     padding: 0;
     margin: 0;
+  }
+
+  .field-message {
+    font-size: ${customTokens.textSize.xs.fontSize};
+    font-weight: 400;
+    color: var(--ant-color-error);
+    margin: ${getDimensionToken(customTokens.spacing[1])} 0 0;
+  }
+  .field-label {
+    font-size: ${customTokens.textSize.sm.fontSize};
+    font-weight: 500;
+    line-height: ${customTokens.textSize.base.lineHeight};
+  }
+  .field-description {
+    font-size: ${customTokens.textSize.sm.fontSize};
+    font-weight: 400;
+    color: var(--ant-color-text-disabled);
   }
 `

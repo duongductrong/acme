@@ -11,5 +11,6 @@ export const PAGE_URLS = {
     MEDIA_VIEW: "/admin/media/[id]",
 
     SETTINGS: "/admin/settings",
+    SETTINGS_PROFILE: "/admin/settings/profile",
   },
 } as const

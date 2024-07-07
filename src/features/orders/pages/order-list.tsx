@@ -13,9 +13,8 @@ import { PAGE_URLS } from "@/constants/urls"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SelectProps, Space, Tag } from "antd"
 import { createStyles } from "antd-style"
-import { Filter, Package2, PieChart, User } from "lucide-react"
-import { useState } from "react"
 import { Form } from "hookform-field"
+import { Filter, Package2, PieChart, User } from "lucide-react"
 import { z } from "zod"
 
 const filterSchema = z.object({ search: z.string().nullish(), showFields: z.any() })
@@ -140,13 +139,6 @@ const sharedProps: SelectProps = {
 
 const OrderList = (props: OrderListProps) => {
   const { cx, styles } = useStyles()
-
-  const [value, setValue] = useState(["a10", "c12", "h17", "j19", "k20"])
-
-  const selectProps: SelectProps = {
-    value,
-    onChange: setValue,
-  }
 
   return (
     <PageFragment>

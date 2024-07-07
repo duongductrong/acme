@@ -1,4 +1,5 @@
 import { BackButton } from "@/components/ant-ui/buttons/back-button"
+import { PAGE_URLS } from "@/constants/urls"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
 import { ComponentPropsWithoutRef } from "react"
@@ -10,7 +11,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
 
   return (
     <Flex {...props} className={cx(styles.root, className)} align="center" gap={12}>
-      <BackButton />
+      <BackButton to={PAGE_URLS.ADMIN.DASHBOARD} />
     </Flex>
   )
 }

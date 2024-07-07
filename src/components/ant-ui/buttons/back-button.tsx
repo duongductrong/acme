@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Button } from "../ui/button"
@@ -5,9 +7,10 @@ import { Flex } from "../ui/flex"
 
 export interface BackButtonProps {
   label?: string
+  to: string
 }
 
-export const BackButton = ({ label = "Go back" }: BackButtonProps) => {
+export const BackButton = ({ label = "Go back", to }: BackButtonProps) => {
   const router = useRouter()
 
   return (
@@ -15,7 +18,9 @@ export const BackButton = ({ label = "Go back" }: BackButtonProps) => {
       <Button
         type="default"
         style={{ width: 32, height: 32, padding: 0 }}
-        onClick={() => router.back()}
+        onClick={() => {
+          router.push(to)
+        }}
       >
         <ArrowLeft width={16} height={16} />
       </Button>

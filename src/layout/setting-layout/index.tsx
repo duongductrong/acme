@@ -16,7 +16,7 @@ const SettingLayout = ({ children }: SettingLayoutProps) => {
   return (
     <PageLayout>
       <Sidebar className={cx(styles.sidebar)} />
-      <Page component="main" className={cx(styles.main)}>
+      <Page component="main" className={cx(styles.main)} noPageHeader>
         {children}
       </Page>
     </PageLayout>

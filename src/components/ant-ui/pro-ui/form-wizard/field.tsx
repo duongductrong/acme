@@ -29,17 +29,27 @@ const Radio = dynamic(() => import("antd/es/radio"), { ssr: true, loading: loadi
 const DatePicker = dynamic(() => import("antd/es/date-picker"), { ssr: true, loading: loading })
 const TimePicker = dynamic(() => import("antd/es/time-picker"), { ssr: true, loading: loading })
 
-export const Field = createField({
-  number: InputNumber,
-  select: Select,
-  text: Input,
-  textarea: Textarea,
-  password: Password,
-  otp: OTP,
-  search: Search,
-  rate: Rate,
-  checkbox: Checkbox,
-  radio: Radio,
-  date: DatePicker,
-  time: TimePicker,
-})
+export const Field = createField(
+  {
+    number: InputNumber,
+    select: Select,
+    text: Input,
+    textarea: Textarea,
+    password: Password,
+    otp: OTP,
+    search: Search,
+    rate: Rate,
+    checkbox: Checkbox,
+    radio: Radio,
+    date: DatePicker,
+    time: TimePicker,
+  },
+  {
+    classNames: {
+      label: "text-sm",
+      description: "text-sm",
+      input: "",
+      message: "text-sm",
+    },
+  },
+)

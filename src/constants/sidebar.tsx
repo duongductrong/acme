@@ -136,7 +136,11 @@ export const menuItems: MenuItem[] = [
       { key: "setup-integration", label: "Integrations", icon: <Satellite size={16} /> },
       {
         key: "setup-settings",
-        label: <Link href={PAGE_URLS.ADMIN.SETTINGS}>Settings</Link>,
+        label: (
+          <Link href={PAGE_URLS.ADMIN.SETTINGS} values={{ from: PAGE_URLS.ADMIN.DASHBOARD }}>
+            Settings
+          </Link>
+        ),
         icon: <Settings size={16} />,
       },
     ],
@@ -149,7 +153,11 @@ export const settingItems: MenuItem[] = [
     label: "Account",
     type: "group",
     children: [
-      { key: "profile", label: <Link href="#">Profile</Link>, icon: <User size={16} /> },
+      {
+        key: "profile",
+        label: <Link href={PAGE_URLS.ADMIN.SETTINGS_PROFILE}>Profile</Link>,
+        icon: <User size={16} />,
+      },
       {
         key: "storage-account",
         label: <Link href="#">Storage account</Link>,
