@@ -2,13 +2,13 @@ import { cn } from "@/lib/tailwind"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import { CSSProperties } from "react"
-// import "./globals.css"
+import "./globals.css"
 
 const fontSans = FontSans({
   subsets: ["latin"],
   preload: true,
   display: "swap",
-  // variable: "--font-sans",
+  variable: "--font-sans",
 })
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({
             MozOsxFontSmoothing: "grayscale",
           } as CSSProperties
         }
-        className={cn(fontSans.className)}
+        className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}
       >
         {children}
       </body>
