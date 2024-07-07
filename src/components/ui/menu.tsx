@@ -37,7 +37,9 @@ export interface MenuGroupProps {
 const MenuGroup = React.forwardRef(
   ({ component: Comp = "div", children, label, className, ...props }, ref) => (
     <Comp {...props} className={cn("mb-3", className)} ref={ref}>
-      <label className={cn("text-[13px] font-medium text-page-group-label")}>{label}</label>
+      <label className={cn("mb-2 block text-[13px] font-medium text-page-group-label")}>
+        {label}
+      </label>
       <div className="flex flex-col gap-[2px]">{children}</div>
     </Comp>
   ),

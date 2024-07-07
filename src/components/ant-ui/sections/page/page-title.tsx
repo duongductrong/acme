@@ -1,13 +1,6 @@
 "use client"
-import { createStyles } from "antd-style"
-import Flex from "antd/es/flex"
-import Typography from "antd/es/typography"
-import { ReactElement, ReactNode, cloneElement } from "react"
-import { getDimensionToken } from "../../ui/utils"
-import { useCommonPageStyles } from "./use-page-styles"
-
-const Title = Typography.Title
-const Text = Typography.Text
+import { cn } from "@/lib/tailwind"
+import { ReactNode } from "react"
 
 export interface PageTitleProps {
   title: string
@@ -27,51 +20,20 @@ export const PageTitle = ({
   isCard,
   withGapBottom,
 }: PageTitleProps) => {
-  const { cx, styles } = useStyles()
-  const { styles: commonPageStyles } = useCommonPageStyles()
-
   return (
-    <Flex
-      component="header"
-      className={cx(
-        styles.root,
-        isCard ? styles.rootCard : undefined,
-        withGapBottom ? commonPageStyles.withGapBottom : undefined,
+    <header
+      className={cn(
+        "flex",
+        isCard ? "px-6 pb-0 pt-6" : undefined,
+        withGapBottom ? "pb-4" : undefined,
       )}
     >
-      <Flex vertical className={styles.content}>
-        <Title level={2}>{title}</Title>
-        <Text>{description}</Text>
-      </Flex>
+      <div className={cn("flex flex-col gap-1")}>
+        <h2 className="text-2xl font-semibold leading-normal">{title}</h2>
+        <p className="text-sm text-muted-foreground">{description}</p>
+      </div>
 
-      {toolbar ? cloneElement(toolbar as ReactElement, { className: cx(styles.toolbar) }) : null}
-    </Flex>
+      {toolbar ? <div className="ml-auto">{toolbar}</div> : null}
+    </header>
   )
 }
-
-const useStyles = createStyles(({ token }) => {
-  const { paddingInlineBase, paddingBlockBase } = token.Page
-
-  const paddingBlock = getDimensionToken(paddingBlockBase)
-  const paddingInline = getDimensionToken(paddingInlineBase)
-
-  return {
-    root: {
-      "h1,h2,h3,h4,h5,h6": {
-        margin: token.spacing[0],
-      },
-    },
-
-    rootCard: {
-      padding: `${paddingBlock} ${paddingInline} 0 ${paddingInline}`,
-    },
-
-    toolbar: {
-      marginLeft: "auto",
-    },
-
-    content: {
-      gap: token.spacing[2],
-    },
-  }
-})
