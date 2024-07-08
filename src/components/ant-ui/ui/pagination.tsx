@@ -3,7 +3,7 @@
 import { createStyles } from "antd-style"
 import PaginationPrimitive, {
   PaginationProps as PaginationPrimitiveProps,
-} from "antd/lib/Pagination"
+} from "antd/lib/Pagination/Pagination"
 
 export interface PaginationProps extends PaginationPrimitiveProps {}
 
