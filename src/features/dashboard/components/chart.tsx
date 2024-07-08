@@ -1,10 +1,9 @@
 "use client"
 
-import Card from "antd/lib/card/Card"
 import * as React from "react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
-import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   ChartConfig,
   ChartContainer,

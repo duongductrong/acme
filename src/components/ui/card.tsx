@@ -1,14 +1,24 @@
 import * as React from "react"
 
 import { cn } from "@/lib/tailwind"
+import { cva, VariantProps } from "class-variance-authority"
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("rounded-xl border bg-card text-card-foreground shadow", className)}
-      {...props}
-    />
+const cardVariants = cva(["rounded-xl border bg-card text-card-foreground"], {
+  variants: {
+    shadow: { true: "shadow" },
+  },
+  defaultVariants: {
+    shadow: false,
+  },
+})
+
+export interface CardProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof cardVariants> {}
+
+const Card = React.forwardRef<React.ElementRef<"div">, CardProps>(
+  ({ className, shadow = false, ...props }, ref) => (
+    <div {...props} ref={ref} className={cn(cardVariants({ shadow, className }))} />
   ),
 )
 Card.displayName = "Card"
@@ -53,4 +63,4 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 )
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
