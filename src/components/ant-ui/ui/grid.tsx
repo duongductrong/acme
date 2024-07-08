@@ -1,8 +1,8 @@
 "use client"
 
 import { ForwardRefComponent } from "@/types/react-polymorphic"
-import ColPrimitive, { ColProps } from "antd/es/col"
-import RowPrimitive, { RowProps } from "antd/es/row"
+import ColPrimitive, { ColProps } from "antd/lib/col"
+import RowPrimitive, { RowProps } from "antd/lib/row"
 import { forwardRef } from "react"
 
 export const Row = forwardRef(({ ...props }, ref) => (

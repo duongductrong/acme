@@ -1,3 +1,3 @@
-import TooltipPrimitive from "antd/es/tooltip"
+import TooltipPrimitive from "antd/lib/tooltip"
 
 export const Tooltip = TooltipPrimitive

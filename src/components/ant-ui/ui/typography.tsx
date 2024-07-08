@@ -1,6 +1,6 @@
 "use client"
 
-import Typography from "antd/es/typography/"
+import Typography from "antd/lib/typography/"
 
 export const Title = Typography.Title
 

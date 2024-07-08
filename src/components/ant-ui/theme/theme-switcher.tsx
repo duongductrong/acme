@@ -1,5 +1,5 @@
 import { useThemeMode } from "antd-style"
-import Switch from "antd/es/switch"
+import Switch from "antd/lib/switch"
 import { Tooltip } from "../ui/tooltip"
 
 export interface ThemeSwitcherProps {

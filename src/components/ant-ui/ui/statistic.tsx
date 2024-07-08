@@ -1,6 +1,6 @@
 import StatisticPrimitive, {
   StatisticProps as StatisticPrimitiveProps,
-} from "antd/es/statistic/Statistic"
+} from "antd/lib/statistic/Statistic"
 
 export interface StatisticProps extends StatisticPrimitiveProps {}
 

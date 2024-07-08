@@ -1,5 +1,5 @@
 "use client"
 
-import CardPrimitive from "antd/es/card"
+import CardPrimitive from "antd/lib/card"
 
 export const Card = CardPrimitive

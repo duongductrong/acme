@@ -1,7 +1,7 @@
 "use client"
 
 import { createStyles } from "antd-style"
-import TablePrimitive, { TableProps as TablePrimitiveProps } from "antd/es/table"
+import TablePrimitive, { TableProps as TablePrimitiveProps } from "antd/lib/table"
 import { ElementRef, forwardRef } from "react"
 import { getDimensionToken } from "./utils"
 

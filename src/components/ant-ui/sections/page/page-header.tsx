@@ -1,8 +1,8 @@
 "use client"
 
 import { createStyles } from "antd-style"
-import Breadcrumb, { BreadcrumbProps } from "antd/es/breadcrumb"
-import Flex from "antd/es/flex"
+import Breadcrumb, { BreadcrumbProps } from "antd/lib/breadcrumb"
+import Flex from "antd/lib/flex"
 import { ReactElement, ReactNode, cloneElement } from "react"
 
 export interface PageHeaderProps {

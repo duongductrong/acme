@@ -1,4 +1,4 @@
-import { AliasToken } from "antd/es/theme/internal"
+import { AliasToken } from "antd/lib/theme/internal"
 
 const spacingBase = 4
 

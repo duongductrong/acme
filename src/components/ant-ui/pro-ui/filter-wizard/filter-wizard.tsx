@@ -1,5 +1,5 @@
 import { createStyles } from "antd-style"
-import Popover from "antd/es/popover"
+import Popover from "antd/lib/popover"
 import { CSSProperties, ReactNode } from "react"
 import { Button } from "../../ui/button"
 import { Flex } from "../../ui/flex"

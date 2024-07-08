@@ -1,8 +1,8 @@
 "use client"
 
 import { ForwardRefComponent } from "@/types/react-polymorphic"
-import FlexPrimitive from "antd/es/flex"
-import { FlexProps as FlexPrimitiveProps } from "antd/es/flex/interface"
+import FlexPrimitive from "antd/lib/flex"
+import { FlexProps as FlexPrimitiveProps } from "antd/lib/flex/interface"
 import { forwardRef } from "react"
 
 export interface FlexProps extends FlexPrimitiveProps {}

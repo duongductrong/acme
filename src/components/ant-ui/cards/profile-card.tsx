@@ -1,7 +1,7 @@
 import { createStyles } from "antd-style"
-import Avatar from "antd/es/avatar"
-import Flex from "antd/es/flex"
-import Typography from "antd/es/typography"
+import Avatar from "antd/lib/avatar"
+import Flex from "antd/lib/flex"
+import Typography from "antd/lib/typography"
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from "react"
 
 export interface ProfileCardProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {
