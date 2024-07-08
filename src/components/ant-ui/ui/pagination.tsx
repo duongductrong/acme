@@ -1,9 +1,10 @@
 "use client"
 
 import { createStyles } from "antd-style"
-import PaginationPrimitive, {
+import {
+  Pagination as PaginationPrimitive,
   PaginationProps as PaginationPrimitiveProps,
-} from "antd/lib/Pagination/Pagination"
+} from "antd"
 
 export interface PaginationProps extends PaginationPrimitiveProps {}
 
