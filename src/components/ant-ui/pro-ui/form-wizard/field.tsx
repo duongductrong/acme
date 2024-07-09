@@ -16,13 +16,25 @@ const loading = () => <SkeletonInput size="small" />
 //   return forwardRef((props, ref) => <Comp {...props} ref={ref} />)
 // }
 
-const Input = dynamic(() => import("antd/lib/input"), { ssr: true, loading: loading })
-const Textarea = dynamic(() => import("antd/lib/input/TextArea"), { ssr: true, loading: loading })
+const Input = dynamic(() => import("@/components/ui/input").then(({ Input }) => Input), {
+  ssr: true,
+  loading: loading,
+})
+const Textarea = dynamic(
+  () => import("@/components/ui/textarea").then(({ Textarea }) => Textarea),
+  { ssr: true, loading: loading },
+)
 const Password = dynamic(() => import("antd/lib/input/Password"), { ssr: true, loading: loading })
-const OTP = dynamic(() => import("antd/lib/input/OTP"), { ssr: true, loading: loading })
+const OTP = dynamic(() => import("@/components/ui/input-otp").then(({ InputOTP }) => InputOTP), {
+  ssr: true,
+  loading: loading,
+})
 const Search = dynamic(() => import("antd/lib/input/Search"), { ssr: true, loading: loading })
 const InputNumber = dynamic(() => import("antd/lib/input-number"), { ssr: true, loading: loading })
-const Select = dynamic(() => import("antd/lib/select/index"), { ssr: true, loading: loading })
+const Select = dynamic(() => import("@/components/ui/select").then(({ Select }) => Select), {
+  ssr: true,
+  loading: loading,
+})
 const Rate = dynamic(() => import("antd/lib/rate"), { ssr: true, loading: loading })
 const Checkbox = dynamic(() => import("antd/lib/checkbox"), { ssr: true, loading: loading })
 const Radio = dynamic(() => import("antd/lib/radio"), { ssr: true, loading: loading })

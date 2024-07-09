@@ -1,12 +1,15 @@
 "use client"
 
-import * as React from "react"
 import { CaretSortIcon, CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons"
 import * as SelectPrimitive from "@radix-ui/react-select"
+import * as React from "react"
 
 import { cn } from "@/lib/tailwind"
+import { EmptyData } from "./empty"
+import { useElementRect } from "./hooks/use-element-rect"
+import { inputVariants } from "./styles/input"
 
-const Select = SelectPrimitive.Root
+const SelectRoot = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -19,7 +22,11 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "bg-transparent px-3 py-2 text-sm",
+      "whitespace-nowrap",
+      "items-center justify-between",
+      "[&>span]:line-clamp-1",
+      inputVariants({ withTrigger: true }),
       className,
     )}
     {...props}
@@ -68,7 +75,9 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md bg-popover text-popover-foreground shadow-dropdown",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
         className,
@@ -138,15 +147,97 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+export interface SelectOption {
+  label: React.ReactNode
+  value: string | number | symbol
+}
+
+export interface SelectGroupOption {
+  label: React.ReactNode
+  children: SelectOption[]
+}
+
+export type SelectProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value> & {
+  value?: string
+  onChange?: (value: string) => void
+  options: SelectOption[] | SelectGroupOption[]
+}
+
+const Select = React.forwardRef<React.ElementRef<typeof SelectPrimitive.Value>, SelectProps>(
+  ({ className, value, options = [], ...props }, ref) => {
+    const id = React.useId()
+
+    const [triggerRef, { width }] = useElementRect()
+
+    const hasOptions = !!options.length
+
+    console.log(value)
+
+    return (
+      <SelectRoot
+        value={value}
+        onValueChange={(value) => props?.onChange?.(value)}
+        onOpenChange={() => props.onBlur?.(null as any)}
+      >
+        <SelectTrigger
+          ref={triggerRef}
+          className={cn("w-full min-w-[200px]", !value ? "text-placeholder" : null, className)}
+        >
+          <SelectValue {...props} ref={ref} />
+        </SelectTrigger>
+        <SelectContent style={{ width: width }}>
+          {hasOptions ? (
+            options.map((option, idx) => {
+              const isGroup = Object.hasOwn(option, "children")
+
+              if (isGroup) {
+                return (
+                  <SelectGroup key={`${id}${idx}`}>
+                    <SelectLabel>{option.label}</SelectLabel>
+
+                    {(option as SelectGroupOption).children.map((item) => {
+                      const val = item.value.toString()
+                      return (
+                        <SelectItem key={val} value={val}>
+                          {item.label}
+                        </SelectItem>
+                      )
+                    })}
+                  </SelectGroup>
+                )
+              }
+
+              const _option = option as SelectOption
+              const val = _option.value.toString()
+
+              return (
+                <SelectItem key={val} value={val}>
+                  {option.label}
+                </SelectItem>
+              )
+            })
+          ) : (
+            <div className="flex min-h-[150px] items-center justify-center">
+              <EmptyData />
+            </div>
+          )}
+        </SelectContent>
+      </SelectRoot>
+    )
+  },
+)
+Select.displayName = "Select"
+
 export {
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
+  SelectRoot,
   SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
 }

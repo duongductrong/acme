@@ -15,6 +15,10 @@ const Switch = React.forwardRef<
       className,
     )}
     {...props}
+    onCheckedChange={(checked) => {
+      props.onChange?.(checked as any)
+      props.onCheckedChange?.(checked)
+    }}
     ref={ref}
   >
     <SwitchPrimitives.Thumb

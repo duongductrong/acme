@@ -11,7 +11,7 @@ import { Table, TableProps } from "@/components/ant-ui/ui/table"
 import { Link } from "@/components/router/link"
 import { PAGE_URLS } from "@/constants/urls"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SelectProps, Space, Tag } from "antd"
+import { Space, Tag } from "antd"
 import { createStyles } from "antd-style"
 import { Form } from "hookform-field"
 import { Filter, Package2, PieChart, User } from "lucide-react"
@@ -129,14 +129,6 @@ for (let i = 10; i < 36; i++) {
   })
 }
 
-const sharedProps: SelectProps = {
-  mode: "multiple",
-  style: { width: "300px" },
-  options,
-  placeholder: "Select Item...",
-  maxTagCount: "responsive",
-}
-
 const OrderList = (props: OrderListProps) => {
   const { cx, styles } = useStyles()
 
@@ -145,6 +137,7 @@ const OrderList = (props: OrderListProps) => {
       <Form<FilterSchemaInferred>
         resolver={zodResolver(filterSchema)}
         onSubmit={(values) => console.log(values)}
+        defaultValues={{}}
       >
         <PageBody component={Flex} impact vertical>
           <PageTitle title="Orders" description="Manage your orders so easy and quickly" isCard />
@@ -165,7 +158,7 @@ const OrderList = (props: OrderListProps) => {
           </PageCard>
           <PageCard component={Flex} justify="space-between" withGapBottom>
             <Flex gap={12}>
-              <Field component="text" name="search" placeholder="Search..." allowClear />
+              <Field component="text" name="search" placeholder="Search..." />
               <FilterWizard
                 icon={<Filter size={14} />}
                 attributes={[
@@ -194,8 +187,17 @@ const OrderList = (props: OrderListProps) => {
             <Field
               component="select"
               name="showFields"
-              {...sharedProps}
               placeholder="Show fields"
+              options={[
+                {
+                  label: "1",
+                  value: "1",
+                },
+                {
+                  label: "2",
+                  value: "2",
+                },
+              ]}
             />
           </PageCard>
           <Table className={cx(styles.table)} columns={columns} dataSource={data} impact />

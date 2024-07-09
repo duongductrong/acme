@@ -1,54 +1,28 @@
 import { Text } from "@/components/ant-ui/ui/typography"
-import { SlackOutlined } from "@ant-design/icons"
+import { cn } from "@/lib/tailwind"
 import { Flex } from "antd"
-import { createStyles } from "antd-style"
-import { ChevronsUpDown } from "lucide-react"
+import { ChevronsUpDown, Vegan } from "lucide-react"
 import { ComponentPropsWithoutRef } from "react"
 
 export interface BrandNameProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {}
 
 const BrandName = ({ className, ...props }: BrandNameProps) => {
-  const { cx, styles } = useStyles()
   return (
-    <Flex {...props} className={cx(styles.root, className)} align="center" gap={12}>
-      <span className={cx(styles.logo)}>
-        <SlackOutlined width={24} height={24} />
+    <div {...props} className={cn("flex w-full items-center gap-3 font-semibold", className)}>
+      <span
+        className={cn(
+          "flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-primary",
+        )}
+      >
+        <Vegan width={16} height={16} className="size-4 text-primary-foreground" />
       </span>
       <Text>Acme Corp.</Text>
 
-      <button type="button" className={cx(styles.themeMode)}>
-        <ChevronsUpDown size={16} />
+      <button type="button" className="ml-auto">
+        <ChevronsUpDown size={16} className="size-4 text-muted-foreground" />
       </button>
-    </Flex>
+    </div>
   )
 }
-
-const useStyles = createStyles(({ token, isDarkMode }) => ({
-  root: {
-    width: "100%",
-    fontWeight: "600",
-  },
-
-  logo: {
-    width: token.sizeXL,
-    height: token.sizeXL,
-    display: "grid",
-    placeItems: "center",
-    background: token.colorPrimary,
-    borderRadius: token.borderRadiusLG,
-    color: token.colorWhite,
-    cursor: "pointer",
-  },
-
-  themeMode: {
-    background: "none",
-    border: "none",
-    marginLeft: "auto",
-    cursor: "pointer",
-    display: "grid",
-    placeItems: "center",
-    color: token.colorTextDisabled,
-  },
-}))
 
 export default BrandName
