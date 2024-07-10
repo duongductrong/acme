@@ -8,7 +8,7 @@ export interface FileListPageProps {}
 const FileListPage = (props: FileListPageProps) => {
   return (
     <PageBody>
-      <FileListQuickActions />
+      <FileListQuickActions className="mb-4" />
       <FileListRecentlyUsed />
       <FileListAll />
     </PageBody>

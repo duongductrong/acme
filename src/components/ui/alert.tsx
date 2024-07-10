@@ -1,11 +1,11 @@
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/tailwind"
+import { tv, VariantProps } from "tailwind-variants"
 
-const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
+const alertVariants = tv(
   {
+    base: "relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
     variants: {
       variant: {
         default: "bg-background text-foreground",
@@ -17,6 +17,7 @@ const alertVariants = cva(
       variant: "default",
     },
   },
+  { responsiveVariants: true },
 )
 
 const Alert = React.forwardRef<

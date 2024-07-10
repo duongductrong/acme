@@ -38,9 +38,14 @@
 
     --radius: 0.5rem;
 
+    --gap: 1rem;
+
     --page-sidebar: #fbfbfb;
     --page-border: 0 0 94%;
     --page-group-label: #00000073;
+    --page-item-header: 48px;
+    --page-item-footer: 48px;
+    --page-body-width: 800px;
 
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;

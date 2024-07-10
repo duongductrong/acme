@@ -1,20 +1,34 @@
 "use client"
+import { cn } from "@/lib/tailwind"
 import { ForwardRefComponent } from "@/types/react-polymorphic"
-import { createStyles } from "antd-style"
-import { ReactNode, forwardRef } from "react"
-import { getDimensionToken } from "../../ui/utils"
+import { cva, VariantProps } from "class-variance-authority"
+import { forwardRef, ReactNode } from "react"
 import { usePageContext } from "./use-page-context"
 
-export interface PageBodyProps {
+const pageBodyVariants = cva(["p-gap"], {
+  variants: {
+    variant: {
+      container: "max-w-[var(--page-body-width)] m-auto w-full",
+      fluid: "w-full max-w-full",
+    },
+    impact: { true: "p-0" },
+    inPage: {
+      true: "max-h-[calc(100lvh-var(--page-item-header)-var(--page-item-footer))] overflow-auto",
+    },
+    fluidVertical: {
+      true: "h-auto min-[100lvh]",
+      false: "h-[calc(100lvh - var(--page-item-header))]",
+    },
+  },
+  defaultVariants: {
+    variant: "fluid",
+  },
+})
+
+export type PageBodyVariantsProps = VariantProps<typeof pageBodyVariants>
+
+export interface PageBodyProps extends Omit<PageBodyVariantsProps, "fluidVertical"> {
   children: ReactNode
-  impact?: boolean
-  inPage?: boolean
-
-  variant?: "container" | "fluid"
-}
-
-interface UseStyleProps {
-  fluidVertical?: boolean
 }
 
 export const PageBody = forwardRef(
@@ -31,17 +45,13 @@ export const PageBody = forwardRef(
     ref,
   ) => {
     const { noPageHeader } = usePageContext()
-    const { cx, styles } = useStyles({ fluidVertical: noPageHeader })
 
     return (
       <Comp
         {...props}
         ref={ref}
-        className={cx(
-          styles.root,
-          impact ? styles.impact : undefined,
-          inPage ? styles.rootInPage : undefined,
-          styles[variant],
+        className={cn(
+          pageBodyVariants({ variant, inPage, impact, fluidVertical: noPageHeader }),
           className,
         )}
       >
@@ -52,33 +62,3 @@ export const PageBody = forwardRef(
 ) as ForwardRefComponent<"section", PageBodyProps>
 
 PageBody.displayName = "PageBody"
-
-const useStyles = createStyles(({ token }, props: UseStyleProps) => ({
-  root: {
-    padding: getDimensionToken(token.Page.paddingInlineBase),
-    height: props.fluidVertical
-      ? undefined
-      : `calc(100lvh - ${getDimensionToken(token.Page.itemHeaderHeight)})`,
-    minHeight: props.fluidVertical ? "100lvh" : undefined,
-  },
-
-  rootInPage: {
-    maxHeight: `calc(100lvh - ${getDimensionToken(token.Page.itemHeaderHeight)} - ${getDimensionToken(token.Page.itemFooterHeight)})`,
-    overflow: "auto",
-  },
-
-  fluid: {
-    width: "100%",
-    maxWidth: "100%",
-  },
-
-  container: {
-    maxWidth: "800px",
-    margin: "auto",
-    width: "100%",
-  },
-
-  impact: {
-    padding: token.spacing[0],
-  },
-}))

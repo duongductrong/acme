@@ -1,40 +1,38 @@
-import { Button } from "@/components/ant-ui/ui/button"
-import { Flex } from "@/components/ant-ui/ui/flex"
-import { Segmented } from "@/components/ant-ui/ui/segmented"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/tailwind"
 import { ArrowUp, FolderPlus, Plus, Settings } from "lucide-react"
+import { ComponentPropsWithoutRef } from "react"
 
-import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons"
+export interface FileListQuickActionsProps extends ComponentPropsWithoutRef<"div"> {}
 
-export interface FileListQuickActionsProps {}
-
-const FileListQuickActions = (props: FileListQuickActionsProps) => {
+const FileListQuickActions = ({ className, ...props }: FileListQuickActionsProps) => {
   return (
-    <Flex align="center" justify="space-between" gap={12}>
-      <Flex align="center" gap={12}>
-        <Button icon={<ArrowUp size={16} />} type="primary">
+    <div {...props} className={cn("flex items-center justify-between gap-3", className)}>
+      <div className="flex justify-center gap-3">
+        <Button icon={<ArrowUp size={16} />} variant="default">
           Upload
         </Button>
-        <Button icon={<Plus size={16} />} type="default">
+        <Button icon={<Plus size={16} />} variant="outline">
           New file
         </Button>
-        <Button icon={<FolderPlus size={16} />} type="default">
+        <Button icon={<FolderPlus size={16} />} variant="outline">
           New folder
         </Button>
-        <Button icon={<Settings size={16} />} type="default">
+        <Button icon={<Settings size={16} />} variant="outline">
           Settings
         </Button>
-      </Flex>
+      </div>
 
-      <Flex align="center" gap={12}>
-        <Segmented
+      <div className="justify-center gap-3">
+        {/* <Segmented
           defaultValue="grid"
           options={[
             { value: "grid", icon: <AppstoreOutlined /> },
             { value: "list", icon: <BarsOutlined /> },
           ]}
-        />
-      </Flex>
-    </Flex>
+        /> */}
+      </div>
+    </div>
   )
 }
 

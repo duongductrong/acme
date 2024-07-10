@@ -1,7 +1,7 @@
 import { Text } from "@/components/ant-ui/ui/typography"
 import { cn } from "@/lib/tailwind"
 import { Flex } from "antd"
-import { ChevronsUpDown, Vegan } from "lucide-react"
+import { ChevronsUpDown, Crown, Vegan } from "lucide-react"
 import { ComponentPropsWithoutRef } from "react"
 
 export interface BrandNameProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {}
@@ -14,7 +14,7 @@ const BrandName = ({ className, ...props }: BrandNameProps) => {
           "flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-primary",
         )}
       >
-        <Vegan width={16} height={16} className="size-4 text-primary-foreground" />
+        <Crown width={16} height={16} className="size-4 text-primary-foreground" />
       </span>
       <Text>Acme Corp.</Text>
 

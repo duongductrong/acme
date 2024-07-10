@@ -8,26 +8,11 @@ export interface PageTitleProps {
   children?: ReactNode
 
   toolbar?: ReactNode
-
-  isCard?: boolean
-  withGapBottom?: boolean
 }
 
-export const PageTitle = ({
-  title,
-  description,
-  toolbar,
-  isCard,
-  withGapBottom,
-}: PageTitleProps) => {
+export const PageTitle = ({ title, description, toolbar }: PageTitleProps) => {
   return (
-    <header
-      className={cn(
-        "flex",
-        isCard ? "px-6 pb-0 pt-6" : undefined,
-        withGapBottom ? "pb-4" : undefined,
-      )}
-    >
+    <header className={cn("flex")}>
       <div className={cn("flex flex-col gap-1")}>
         <h2 className="text-2xl font-semibold leading-normal">{title}</h2>
         <p className="text-sm text-muted-foreground">{description}</p>

@@ -13,33 +13,23 @@ const FileListRecentlyUsed = (props: FileListRecentlyUsedProps) => {
         <Title level={3}>Recently used</Title>
       </Flex>
 
-      <Row gutter={[16, 16]}>
-        <Col span={4}>
-          <FileCard type="folder" filename="2024_camera_image_3029.png" />
-        </Col>
-        <Col span={4}>
-          <FileCard type="folder" filename="2024_camera_image_3029.png" />
-        </Col>
-        <Col span={4}>
-          <FileCard type="folder" filename="2024_camera_image_3029.png" />
-        </Col>
-        <Col span={4}>
-          <FileCard
-            type="file"
-            filename="2024_camera_image_3029.png"
-            mimetype="PNG"
-            originalSize={2048}
-          />
-        </Col>
-        <Col span={4}>
-          <FileCard
-            type="file"
-            filename="2024_camera_image_3029.png"
-            mimetype="PNG"
-            originalSize={2048}
-          />
-        </Col>
-      </Row>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
+        <FileCard type="folder" filename="2024_camera_image_3029.png" />
+        <FileCard type="folder" filename="2024_camera_image_3029.png" />
+        <FileCard type="folder" filename="2024_camera_image_3029.png" />
+        <FileCard
+          type="file"
+          filename="2024_camera_image_3029.png"
+          mimetype="PNG"
+          originalSize={2048}
+        />
+        <FileCard
+          type="file"
+          filename="2024_camera_image_3029.png"
+          mimetype="PNG"
+          originalSize={2048}
+        />
+      </div>
     </Flex>
   )
 }

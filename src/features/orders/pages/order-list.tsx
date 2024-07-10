@@ -3,16 +3,11 @@
 import { FilterWizard } from "@/components/ant-ui/pro-ui/filter-wizard"
 import { Field } from "@/components/ant-ui/pro-ui/form-wizard/field"
 import { PageBody, PageCard, PageFragment, PageTitle } from "@/components/ant-ui/sections/page"
-import { Card } from "@/components/ant-ui/ui/card"
-import { Flex } from "@/components/ant-ui/ui/flex"
-import { Col, Row } from "@/components/ant-ui/ui/grid"
-import { Statistic } from "@/components/ant-ui/ui/statistic"
 import { Table, TableProps } from "@/components/ant-ui/ui/table"
 import { Link } from "@/components/router/link"
 import { PAGE_URLS } from "@/constants/urls"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Space, Tag } from "antd"
-import { createStyles } from "antd-style"
 import { Form } from "hookform-field"
 import { Filter, Package2, PieChart, User } from "lucide-react"
 import { z } from "zod"
@@ -130,8 +125,6 @@ for (let i = 10; i < 36; i++) {
 }
 
 const OrderList = (props: OrderListProps) => {
-  const { cx, styles } = useStyles()
-
   return (
     <PageFragment>
       <Form<FilterSchemaInferred>
@@ -139,25 +132,10 @@ const OrderList = (props: OrderListProps) => {
         onSubmit={(values) => console.log(values)}
         defaultValues={{}}
       >
-        <PageBody component={Flex} impact vertical>
-          <PageTitle title="Orders" description="Manage your orders so easy and quickly" isCard />
-
-          <PageCard>
-            <Row gutter={16}>
-              <Col span={4}>
-                <Card>
-                  <Statistic title="Total orders" value={1083} />
-                </Card>
-              </Col>
-              <Col span={4}>
-                <Card>
-                  <Statistic title="Total profit" value={112893} suffix="$" />
-                </Card>
-              </Col>
-            </Row>
-          </PageCard>
-          <PageCard component={Flex} justify="space-between" withGapBottom>
-            <Flex gap={12}>
+        <PageBody className="flex flex-col gap-4">
+          <PageTitle title="Orders" description="Manage your orders so easy and quickly" />
+          <PageCard component="div" className="flex items-center justify-between">
+            <div className="flex gap-3">
               <Field component="text" name="search" placeholder="Search..." />
               <FilterWizard
                 icon={<Filter size={14} />}
@@ -182,7 +160,7 @@ const OrderList = (props: OrderListProps) => {
                   },
                 ]}
               />
-            </Flex>
+            </div>
 
             <Field
               component="select"
@@ -200,17 +178,11 @@ const OrderList = (props: OrderListProps) => {
               ]}
             />
           </PageCard>
-          <Table className={cx(styles.table)} columns={columns} dataSource={data} impact />
+          <Table columns={columns} dataSource={data} impact />
         </PageBody>
       </Form>
     </PageFragment>
   )
 }
-
-const useStyles = createStyles(({ token }) => ({
-  card: {},
-  segments: {},
-  table: {},
-}))
 
 export default OrderList

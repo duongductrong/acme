@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss"
 import { fontFamily } from "tailwindcss/defaultTheme"
+import { withTV } from "tailwind-variants/transformer"
 
 const config = {
   darkMode: ["class"],
@@ -72,6 +73,9 @@ const config = {
           },
         },
       },
+      spacing: {
+        gap: "var(--gap)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -105,4 +109,4 @@ const config = {
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
-export default config
+export default withTV(config)
