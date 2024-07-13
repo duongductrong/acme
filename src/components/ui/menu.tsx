@@ -58,9 +58,9 @@ const MenuEntry = React.forwardRef(
       className={cn(
         "cursor-pointer",
         "flex flex-1 items-center justify-start gap-3 rounded-md px-2 py-[6px] text-sm font-medium",
-        "hover:bg-secondary",
+        "hover:bg-primary/5",
         "transition-all [&[data-state=open]>svg.collapse-icon]:rotate-180",
-        active ? "bg-secondary" : null,
+        active ? "bg-primary/5 text-primary" : null,
         className,
       )}
       {...props}

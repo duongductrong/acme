@@ -1,4 +1,5 @@
-import { ThemeProvider } from "@/components/ant-ui/theme/provider"
+import { ThemeProvider as AntThemeProvider } from "@/components/ant-ui/theme/provider"
+import { ThemeProvider } from "@/components/ui/theme/provider"
 import { ReactNode } from "react"
 
 export interface LayoutProps {
@@ -6,7 +7,11 @@ export interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  return <ThemeProvider>{children}</ThemeProvider>
+  return (
+    <AntThemeProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </AntThemeProvider>
+  )
 }
 
 export default Layout

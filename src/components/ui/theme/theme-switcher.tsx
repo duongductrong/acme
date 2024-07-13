@@ -1,6 +1,5 @@
+import { Tooltip } from "@/components/ant-ui/ui/tooltip"
 import { Switch } from "@/components/ui/switch"
-import { useThemeMode } from "antd-style"
-import { Tooltip } from "../ui/tooltip"
 import { useTheme } from "next-themes"
 
 export interface ThemeSwitcherProps {

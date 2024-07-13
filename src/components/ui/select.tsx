@@ -171,8 +171,6 @@ const Select = React.forwardRef<React.ElementRef<typeof SelectPrimitive.Value>, 
 
     const hasOptions = !!options.length
 
-    console.log(value)
-
     return (
       <SelectRoot
         value={value}

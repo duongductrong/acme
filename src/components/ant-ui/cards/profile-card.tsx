@@ -1,10 +1,10 @@
+import { cn } from "@/lib/tailwind"
 import { createStyles } from "antd-style"
-import Avatar from "antd/lib/avatar"
 import Flex from "antd/lib/flex"
-import Typography from "antd/lib/typography"
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from "react"
+import { Avatar } from "../ui/avatar"
 
-export interface ProfileCardProps extends Omit<ComponentPropsWithoutRef<typeof Flex>, "children"> {
+export interface ProfileCardProps extends Omit<ComponentPropsWithoutRef<"div">, "children"> {
   avatar?: ReactNode | string
   name: string
   email: string
@@ -12,27 +12,20 @@ export interface ProfileCardProps extends Omit<ComponentPropsWithoutRef<typeof F
   icon?: ReactNode
 }
 
-const Text = Typography.Text
-
-export const ProfileCard = forwardRef<ElementRef<typeof Flex>, ProfileCardProps>(
-  ({ avatar, icon, email, name, ...props }, ref) => {
+export const ProfileCard = forwardRef<ElementRef<"div">, ProfileCardProps>(
+  ({ avatar, icon, email, name, className, ...props }, ref) => {
     const { cx, styles } = useStyles()
     return (
-      <Flex align="center" gap={12} {...props} ref={ref}>
-        <Avatar
-          shape="square"
-          size={32}
-          src={typeof avatar === "string" ? avatar : undefined}
-          icon={avatar}
-        />
+      <div className={cn("flex items-center gap-3", className)} {...props} ref={ref}>
+        <Avatar src={typeof avatar === "string" ? avatar : undefined} icon={avatar} />
 
         <Flex className={cx(styles.content)} vertical>
-          <Text>{name}</Text>
-          <Text>{email}</Text>
+          <p className="text-[13px] font-medium">{name}</p>
+          <p className="text-[13px] font-normal">{email}</p>
         </Flex>
 
         {icon}
-      </Flex>
+      </div>
     )
   },
 )

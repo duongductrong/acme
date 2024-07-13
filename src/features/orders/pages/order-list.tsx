@@ -136,7 +136,18 @@ const OrderList = (props: OrderListProps) => {
           <PageTitle title="Orders" description="Manage your orders so easy and quickly" />
           <PageCard component="div" className="flex items-center justify-between">
             <div className="flex gap-3">
-              <Field component="text" name="search" placeholder="Search..." />
+              <Field
+                formatOptions={{
+                  // style: "unit",
+                  // unit: "%"
+                  style: "currency",
+                  currency: "VND",
+                  currencySign: "accounting",
+                }}
+                component="number"
+                name="search"
+                placeholder="Search..."
+              />
               <FilterWizard
                 icon={<Filter size={14} />}
                 attributes={[

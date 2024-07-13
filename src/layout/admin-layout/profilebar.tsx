@@ -1,16 +1,15 @@
 import { ProfileCard } from "@/components/ant-ui/cards/profile-card"
-import { ThemeSwitcher } from "@/components/ant-ui/theme/theme-switcher"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { ThemeSwitcher } from "@/components/ui/theme/theme-switcher"
 import { cn } from "@/lib/tailwind"
-import { UserOutlined } from "@ant-design/icons"
 import Flex from "antd/lib/flex"
 import Typography from "antd/lib/typography"
-import { ChevronsUpDown } from "lucide-react"
+import { ChevronsUpDown, User, User2 } from "lucide-react"
 import { ComponentPropsWithoutRef, useMemo } from "react"
 
 const Text = Typography.Text
@@ -22,7 +21,7 @@ const ProfileBar = ({ className, ...props }: ProfileBarProps) => {
     () => [
       {
         key: "profile",
-        label: <ProfileCard name="Taurus" email="taurus@gmail.com" avatar={<UserOutlined />} />,
+        label: <ProfileCard name="Taurus" email="taurus@gmail.com" avatar={<User2 />} />,
       },
       {
         key: "account",
@@ -51,10 +50,10 @@ const ProfileBar = ({ className, ...props }: ProfileBarProps) => {
       {
         key: "theme",
         label: (
-          <Flex justify="space-between">
+          <div className="flex w-full items-center justify-between">
             <span>Dark mode</span>
             <ThemeSwitcher />
-          </Flex>
+          </div>
         ),
       },
       {
@@ -75,7 +74,7 @@ const ProfileBar = ({ className, ...props }: ProfileBarProps) => {
           {...props}
           name="Taurus"
           email="taurus@gmail.com"
-          avatar={<UserOutlined />}
+          avatar={<User2 />}
           icon={
             <button className={cn("ml-auto")}>
               <ChevronsUpDown size={16} />
@@ -85,8 +84,8 @@ const ProfileBar = ({ className, ...props }: ProfileBarProps) => {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-[225px]">
-        {items.map((item) => (
-          <DropdownMenuItem key={item?.key as string} className="cursor-pointer">
+        {items.map((item, index) => (
+          <DropdownMenuItem key={(item?.key as string) || `${index}`} className="cursor-pointer">
             {item.label}
           </DropdownMenuItem>
         ))}

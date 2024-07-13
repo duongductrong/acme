@@ -30,7 +30,13 @@ const OTP = dynamic(() => import("@/components/ui/input-otp").then(({ InputOTP }
   loading: loading,
 })
 const Search = dynamic(() => import("antd/lib/input/Search"), { ssr: true, loading: loading })
-const InputNumber = dynamic(() => import("antd/lib/input-number"), { ssr: true, loading: loading })
+const InputNumber = dynamic(
+  () => import("@/components/ui/number-field").then(({ NumberField }) => NumberField),
+  {
+    ssr: true,
+    loading: loading,
+  },
+)
 const Select = dynamic(() => import("@/components/ui/select").then(({ Select }) => Select), {
   ssr: true,
   loading: loading,

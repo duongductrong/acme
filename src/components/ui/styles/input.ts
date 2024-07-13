@@ -1,17 +1,17 @@
-import { cva, VariantProps } from "class-variance-authority"
+import { tv, VariantProps } from "tailwind-variants"
 
-export const inputVariants = cva(
-  [
-    "border border-input",
-    "focus-visible:border-ring/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/10",
-    "focus:border-ring/90 focus:outline-none focus:ring-2 focus:ring-ring/10",
-
-    "flex w-full rounded-md",
-    "bg-transparent px-3 py-1 text-sm transition-colors",
-    "placeholder:text-muted-foreground",
-    "disabled:cursor-not-allowed disabled:opacity-50",
-  ],
+export const inputVariants = tv(
   {
+    base: [
+      "border border-input",
+      "focus-visible:border-ring/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/10",
+      "focus:border-ring/90 focus:outline-none focus:ring-2 focus:ring-ring/10",
+
+      "flex w-full rounded-md",
+      "bg-transparent px-3 py-1 text-sm transition-colors",
+      "placeholder:text-muted-foreground",
+      "disabled:cursor-not-allowed disabled:opacity-50",
+    ],
     variants: {
       withTrigger: {
         true: [
@@ -33,6 +33,7 @@ export const inputVariants = cva(
       shadow: false,
     },
   },
+  { responsiveVariants: true },
 )
 
 export type InputVariantsProps = VariantProps<typeof inputVariants>
