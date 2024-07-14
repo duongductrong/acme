@@ -4,44 +4,34 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    /* --primary: 74 100% 62%;
-    --primary-foreground: 27 53% 3%; */
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    /* --ring: 240 10% 3.9%; */
-    --ring: 215 100% 54%;
-    --placeholder: 240 3.8% 46.1%;
+    --color-background: 0 0% 100%;
+    --color-foreground: 240 10% 3.9%;
+    --color-card: 0 0% 100%;
+    --color-card-foreground: 240 10% 3.9%;
+    --color-popover: 0 0% 100%;
+    --color-popover-foreground: 240 10% 3.9%;
+    --color-primary: 240 5.9% 10%;
+    --color-primary-foreground: 0 0% 98%;
+    --color-secondary: 240 4.8% 95.9%;
+    --color-secondary-foreground: 240 5.9% 10%;
+    --color-muted: 240 4.8% 95.9%;
+    --color-muted-foreground: 240 3.8% 46.1%;
+    --color-accent: 240 4.8% 95.9%;
+    --color-accent-foreground: 240 5.9% 10%;
+    --color-destructive: 0 84.2% 60.2%;
+    --color-destructive-foreground: 0 0% 98%;
+    --color-border: 0 0% 94%;
+    --color-input: 240 5.9% 90%;
+    --color-ring: 215 100% 54%;
+    --color-placeholder: 240 3.8% 46.1%;
+    --color-shadow-dropdown: 0 0% 0%;
 
     --radius: 0.5rem;
 
     --gap: 1rem;
 
     --page-sidebar: #fbfbfb;
-    --page-border: 0 0 94%;
+    --page-border: 0 0% 94%;
     --page-group-label: #00000073;
     --page-item-header: 48px;
     --page-item-footer: 48px;
@@ -55,40 +45,29 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    /* --primary: 240 6% 8%;
-    --primary-foreground: 240 6% 70%; */
-    --primary: 74 100% 62%;
-    --primary-foreground: 27 53% 3%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-
-    --input: 240 3.7% 15.9%;
-
-    /* --ring: 240 4.9% 83.9%; */
-    --ring: 215 100% 54%;
-
-    --placeholder: 240 5% 64.9%;
+    --color-background: 240 10% 3.9%;
+    --color-foreground: 0 0% 98%;
+    --color-card: 240 10% 3.9%;
+    --color-card-foreground: 0 0% 98%;
+    --color-popover: 240 10% 3.9%;
+    --color-popover-foreground: 0 0% 98%;
+    /* --color-primary: 240 6% 8%;
+    --color-primary-foreground: 240 6% 70%; */
+    --color-primary: 74 100% 62%;
+    --color-primary-foreground: 27 53% 3%;
+    --color-secondary: 240 3.7% 15.9%;
+    --color-secondary-foreground: 0 0% 98%;
+    --color-muted: 240 3.7% 15.9%;
+    --color-muted-foreground: 240 5% 64.9%;
+    --color-accent: 240 3.7% 15.9%;
+    --color-accent-foreground: 0 0% 98%;
+    --color-destructive: 0 62.8% 30.6%;
+    --color-destructive-foreground: 0 0% 98%;
+    --color-border: 240 3.7% 15.9%;
+    --color-input: 240 3.7% 15.9%;
+    --color-ring: 215 100% 54%;
+    --color-placeholder: 240 5% 64.9%;
+    --color-shadow-dropdown: 0 0% 10%;
 
     --page-sidebar: #090909;
     --page-border: 0 0 10%;
