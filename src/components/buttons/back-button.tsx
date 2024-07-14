@@ -3,7 +3,6 @@
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Button } from "../ui/button"
-import { Flex } from "../ui/flex"
 
 export interface BackButtonProps {
   label?: string
@@ -14,10 +13,9 @@ export const BackButton = ({ label = "Go back", to }: BackButtonProps) => {
   const router = useRouter()
 
   return (
-    <Flex gap={12} align="center">
+    <div className="flex flex-row items-center gap-3">
       <Button
-        type="default"
-        style={{ width: 32, height: 32, padding: 0 }}
+        className="size-8 p-0"
         onClick={() => {
           router.push(to)
         }}
@@ -26,6 +24,6 @@ export const BackButton = ({ label = "Go back", to }: BackButtonProps) => {
       </Button>
 
       {label}
-    </Flex>
+    </div>
   )
 }

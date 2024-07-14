@@ -4,7 +4,7 @@ import { tv, VariantProps } from "tailwind-variants"
 import { cn } from "@/lib/tailwind"
 import { ForwardRefComponent } from "@/types/react-polymorphic"
 
-const buttonVariants = tv(
+const buttonStyles = tv(
   {
     base: [
       "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium",
@@ -37,14 +37,14 @@ const buttonVariants = tv(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonStyles> {
   icon?: React.ReactNode
 }
 
 const Button = React.forwardRef(
   ({ component: Comp = "button", className, variant, size, children, icon, ...props }, ref) => {
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+      <Comp className={cn(buttonStyles({ variant, size, className }))} ref={ref} {...props}>
         {icon}
         {children}
       </Comp>
@@ -53,4 +53,4 @@ const Button = React.forwardRef(
 ) as ForwardRefComponent<"button", ButtonProps>
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+export { Button, buttonStyles }

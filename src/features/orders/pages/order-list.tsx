@@ -1,15 +1,14 @@
 "use client"
 
-import { FilterWizard } from "@/components/ant-ui/pro-ui/filter-wizard"
 import { Field } from "@/components/ant-ui/pro-ui/form-wizard/field"
 import { PageBody, PageCard, PageFragment, PageTitle } from "@/components/ant-ui/sections/page"
-import { Table, TableProps } from "@/components/ant-ui/ui/table"
 import { Link } from "@/components/router/link"
+import { DataTable } from "@/components/ui/data-table"
 import { PAGE_URLS } from "@/constants/urls"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { ColumnDef } from "@tanstack/react-table"
 import { Space, Tag } from "antd"
 import { Form } from "hookform-field"
-import { Filter, Package2, PieChart, User } from "lucide-react"
 import { z } from "zod"
 
 const filterSchema = z.object({ search: z.string().nullish(), showFields: z.any() })
@@ -19,7 +18,7 @@ export type FilterSchemaInferred = z.infer<typeof filterSchema>
 export interface OrderListProps {}
 
 interface OrderType {
-  key: string
+  accessorKey: string
   orderId: string
   customerName: string
   orderDate: string
@@ -28,58 +27,73 @@ interface OrderType {
   tags: string[]
 }
 
-const columns: TableProps<OrderType>["columns"] = [
+const columns: ColumnDef<OrderType>[] = [
   {
-    title: "Order ID",
-    dataIndex: "orderId",
-    key: "orderId",
-    render: (text, record) => (
+    header: "Order ID",
+    accessorKey: "orderId",
+    cell: ({
+      getValue,
+      cell: {
+        row: { original: record },
+      },
+    }) => (
       <Link
         href={PAGE_URLS.ADMIN.ORDERS_VIEW}
         as={PAGE_URLS.ADMIN.ORDERS_VIEW.replace("[id]", record.orderId)}
       >
-        {text}
+        {getValue<string>()}
       </Link>
     ),
   },
   {
-    title: "Customer Name",
-    dataIndex: "customerName",
-    key: "customerName",
+    header: "Customer Name",
+    accessorKey: "customerName",
   },
   {
-    title: "Order Date",
-    dataIndex: "orderDate",
-    key: "orderDate",
+    header: "Order Date",
+    accessorKey: "orderDate",
   },
   {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-    render: (status) => {
+    header: "Status",
+    accessorKey: "status",
+    cell: ({
+      getValue,
+      cell: {
+        row: { original: record },
+      },
+    }) => {
+      const status = getValue<string>()
       let color = status === "Delivered" ? "green" : status === "Pending" ? "geekblue" : "volcano"
       return <Tag color={color}>{status.toUpperCase()}</Tag>
     },
   },
   {
-    title: "Total Amount",
-    dataIndex: "totalAmount",
-    key: "totalAmount",
-    render: (amount) => `$${amount?.toFixed(2)}`,
+    header: "Total Amount",
+    accessorKey: "totalAmount",
+    cell: ({
+      getValue,
+      cell: {
+        row: { original: record },
+      },
+    }) => `$${getValue<number>()?.toFixed(2)}`,
   },
   {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
+    header: "Tags",
+    accessorKey: "tags",
+    cell: ({
+      getValue,
+      cell: {
+        row: { original: record },
+      },
+    }) => (
       <>
-        {tags.map((tag) => {
+        {getValue<string[]>().map((tag) => {
           let color = tag.length > 5 ? "geekblue" : "green"
           if (tag === "urgent") {
             color = "volcano"
           }
           return (
-            <Tag color={color} key={tag}>
+            <Tag key={tag} color={color}>
               {tag.toUpperCase()}
             </Tag>
           )
@@ -88,19 +102,23 @@ const columns: TableProps<OrderType>["columns"] = [
     ),
   },
   {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
+    header: "Action",
+    accessorKey: "action",
+    cell: ({
+      cell: {
+        row: { original: record },
+      },
+    }) => (
+      <div className="flex flex-row gap-gap whitespace-nowrap">
         <a>View {record.orderId}</a>
         <a>Delete</a>
-      </Space>
+      </div>
     ),
   },
 ]
 
 const data: OrderType[] = Array.from({ length: 100 }, (_, index) => ({
-  key: `ORD${1000 + index}`,
+  accessorKey: `ORD${1000 + index}`,
   orderId: `ORD${1000 + index}`,
   customerName: `Customer ${index + 1}`,
   orderDate: new Date().toLocaleDateString(),
@@ -136,41 +154,7 @@ const OrderList = (props: OrderListProps) => {
           <PageTitle title="Orders" description="Manage your orders so easy and quickly" />
           <PageCard component="div" className="flex items-center justify-between">
             <div className="flex gap-3">
-              <Field
-                formatOptions={{
-                  // style: "unit",
-                  // unit: "%"
-                  style: "currency",
-                  currency: "VND",
-                  currencySign: "accounting",
-                }}
-                component="number"
-                name="search"
-                placeholder="Search..."
-              />
-              <FilterWizard
-                icon={<Filter size={14} />}
-                attributes={[
-                  {
-                    icon: <Package2 size={14} />,
-                    key: "orderId",
-                    label: "Order ID",
-                    type: "text",
-                  },
-                  {
-                    icon: <User size={14} />,
-                    key: "customerName",
-                    label: "Customer Name",
-                    type: "text",
-                  },
-                  {
-                    icon: <PieChart size={14} />,
-                    key: "status",
-                    label: "Status",
-                    type: "select",
-                  },
-                ]}
-              />
+              <Field component="text" name="search" placeholder="Search..." />
             </div>
 
             <Field
@@ -189,7 +173,8 @@ const OrderList = (props: OrderListProps) => {
               ]}
             />
           </PageCard>
-          <Table columns={columns} dataSource={data} impact />
+          {/* <Table columns={columns} dataSource={data} impact /> */}
+          <DataTable columns={columns} data={data} />
         </PageBody>
       </Form>
     </PageFragment>

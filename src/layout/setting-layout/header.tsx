@@ -1,4 +1,4 @@
-import { BackButton } from "@/components/ant-ui/buttons/back-button"
+import { BackButton } from "@/components/buttons/back-button"
 import { PAGE_URLS } from "@/constants/urls"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"

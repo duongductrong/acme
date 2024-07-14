@@ -2,7 +2,7 @@ import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
 
 import { cn } from "@/lib/tailwind"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { ButtonProps, buttonStyles } from "@/components/ui/button"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -35,7 +35,7 @@ const PaginationLink = ({ className, isActive, size = "icon", ...props }: Pagina
   <a
     aria-current={isActive ? "page" : undefined}
     className={cn(
-      buttonVariants({
+      buttonStyles({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
