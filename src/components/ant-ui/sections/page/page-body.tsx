@@ -1,14 +1,15 @@
 "use client"
 import { cn } from "@/lib/tailwind"
 import { ForwardRefComponent } from "@/types/react-polymorphic"
-import { cva, VariantProps } from "class-variance-authority"
 import { forwardRef, ReactNode } from "react"
+import { tv, VariantProps } from "tailwind-variants"
 import { usePageContext } from "./use-page-context"
 
-const pageBodyVariants = cva(["p-gap"], {
+const pageBodyVariants = tv({
+  base: "p-gap",
   variants: {
     variant: {
-      container: "max-w-[var(--page-body-width)] m-auto w-full",
+      container: "m-auto w-full max-w-[var(--page-body-width)]",
       fluid: "w-full max-w-full",
     },
     impact: { true: "p-0" },
@@ -16,7 +17,7 @@ const pageBodyVariants = cva(["p-gap"], {
       true: "max-h-[calc(100lvh-var(--page-item-header)-var(--page-item-footer))] overflow-auto",
     },
     fluidVertical: {
-      true: "h-auto min-[100lvh]",
+      true: "min-[100lvh] h-auto",
       false: "h-[calc(100lvh - var(--page-item-header))]",
     },
   },

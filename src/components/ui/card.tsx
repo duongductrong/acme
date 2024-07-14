@@ -1,9 +1,10 @@
 import * as React from "react"
 
 import { cn } from "@/lib/tailwind"
-import { cva, VariantProps } from "class-variance-authority"
+import { tv, VariantProps } from "tailwind-variants"
 
-const cardVariants = cva(["rounded-xl border bg-card text-card-foreground"], {
+const cardVariants = tv({
+  base: "rounded-xl border bg-card text-card-foreground",
   variants: {
     shadow: { true: "shadow" },
   },
